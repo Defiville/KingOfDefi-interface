@@ -9,6 +9,7 @@ function CastleModal({ show, handleClose }) {
   const [from, setFrom] = useState(bondingTokens[0]);
   const [to, setTo] = useState(bondingTokens[1]);
   const [playState, setPlayState] = useState(false);
+  const [ignoreToken, setIgnoreToken] = useState();
 
   const handleModalClose = () => {
     setPlayState(false);
@@ -29,12 +30,14 @@ function CastleModal({ show, handleClose }) {
     setTokenShow(true);
   };
   const handleFromModal = () => {
+    setIgnoreToken(to?.name || "");
     setState("from");
     handleTokenOpen();
   };
 
   const handleToModal = () => {
     setState("to");
+    setIgnoreToken(from?.name || "");
     handleTokenOpen();
   };
 
@@ -45,6 +48,8 @@ function CastleModal({ show, handleClose }) {
   useEffect(() => {
     setPlayState(false);
   }, []);
+
+  console.log(to, "tototot");
 
   return (
     <>
@@ -85,6 +90,7 @@ function CastleModal({ show, handleClose }) {
         )}
       </CustomModal>
       <SelectTokenModal
+        ignoreToken={ignoreToken}
         show={tokenShow}
         handleClose={handleTokenClose}
         handleSelectedToken={handleSelectedToken}

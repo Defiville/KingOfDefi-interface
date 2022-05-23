@@ -2,7 +2,12 @@ import CustomModal from "../modal/Modal";
 import coin from "../../images/coin.svg";
 import { bondingTokens } from "../../helpers/networks";
 
-function SelectTokenModal({ show, handleClose, handleSelectedToken }) {
+function SelectTokenModal({
+  show,
+  handleClose,
+  handleSelectedToken,
+  ignoreToken,
+}) {
   const handleClick = (token) => {
     handleSelectedToken(token);
     handleClose();
@@ -16,12 +21,14 @@ function SelectTokenModal({ show, handleClose, handleSelectedToken }) {
             <i className="fa-solid fa-xmark" onClick={handleClose}></i>
           </div>
           <ul className="token-list">
-            {bondingTokens?.map((token) => (
-              <li onClick={() => handleClick(token)} key={token.address}>
-                <img src={token.logoURI} alt="" />
-                <span>{token.symbol}</span>
-              </li>
-            ))}
+            {bondingTokens
+              ?.filter((item) => item?.name != ignoreToken)
+              ?.map((token) => (
+                <li onClick={() => handleClick(token)} key={token.address}>
+                  <img src={token.logoURI} alt="" />
+                  <span>{token.symbol}</span>
+                </li>
+              ))}
           </ul>
         </form>
       </div>

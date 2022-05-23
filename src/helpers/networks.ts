@@ -8,14 +8,6 @@ export type TokenDefinition = {
   logoURI: string,
 }
 
-export const islaGaugeNetwork:TokenDefinition = {
-  name: "IslaGauge",
-  address : "0x2DE8a306732A5a8E0FbF1b2B8AA32FC9Bc958c2e",
-  symbol: "ISLAG",
-  decimals: 0,
-  chainId: 137,
-  logoURI: "",
-}
 
 export const usdtNetwork:TokenDefinition = {
   name: "Tether USD",
@@ -44,32 +36,6 @@ export const daiNetwork:TokenDefinition = {
   logoURI: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x6B175474E89094C44Da98b954EedeAC495271d0F/logo.png"
 }
 
-export const bAnyMinterNetwork:TokenDefinition = {
-  name: "BANY Minter",
-  address: "0xbD8BeEE407CAAC3B2f95Eb96f7Fd571a5dEb2A3F",
-  symbol: "BANY Minter",
-  decimals: 0,
-  chainId: 137,
-  logoURI: ""
-}
-
-export const treasuryTbaNetwork: TokenDefinition = {
-  name: "TreasuryTBA",
-  address:"0xa91639Da94bBff6D3efE6e92AE5788a90fb0aF26",
-  symbol: "TreasuryTBA",
-  decimals: 0,
-  chainId: 137,
-  logoURI: ""
-}
-
-export const bAnyNetwork: TokenDefinition = {
-  name:"Backed Any",
-  address: "0xD51a5153f21D035CfBEBf640666f9A79d4d2BaF5",
-  symbol:"BANY",
-  decimals: 18,
-  chainId:137,
-  logoURI:"",
-}
 
 export const islaNetwork: TokenDefinition = {
   name:"Defiville Island Token",
@@ -79,6 +45,26 @@ export const islaNetwork: TokenDefinition = {
   chainId:137,
   logoURI:"",
 }
+
+export const chainLinkHubNetwork: TokenDefinition = {
+  name:"Chain Link Hub",
+  address: "0x1E971Ea883BeF39f6e35DE876E66257DE2dA22dC",
+  symbol:"CLH",
+  decimals: 18,
+  chainId:137,
+  logoURI:"",
+}
+
+export const kingOfDefiV0Network: TokenDefinition = {
+  name:"King of Defi",
+  address: "0x0fa3C73e97b77c2AB5Ea51841398cb0f95023b5f",
+  symbol:"KOD",
+  decimals: 18,
+  chainId:137,
+  logoURI:"",
+}
+
+
 
 export const bondingTokens = [
   daiNetwork, usdcNetwork, usdtNetwork
