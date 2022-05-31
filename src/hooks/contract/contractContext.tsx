@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Contract, ContractInterface, ethers } from "ethers";
 import kingOfDefiV0Abi from "../../contracts/kingOfDefiV0.json";
-import chainLinkHubAbi from "../../contracts/kingOfDefiV0.json";
+import chainLinkHubAbi from "../../contracts/chainLinkHub.json";
 import Erc20Abi from "../../contracts/erc20.json";
 
 import {

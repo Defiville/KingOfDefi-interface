@@ -2,14 +2,22 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "../../modal/Modal";
 import SelectTokenModal from "../../selectModal/SelectToken";
 import { bondingTokens } from "../../../helpers/networks";
+import CastleInteraction from "./CastleInteraction/CastleInteraction";
+import CastlePlay from "./CastlePlay/CastlePlay";
+import coin from "../../../images/coin.svg";
+import { allTokens } from "../../../helpers/SwapTokens";
+import { useSelector } from "react-redux";
 
 function CastleModal({ show, handleClose }) {
   const [tokenShow, setTokenShow] = useState(false);
+  const { assets } = useSelector((state) => state.swapAssets);
   const [state, setState] = useState("");
-  const [from, setFrom] = useState(bondingTokens[0]);
-  const [to, setTo] = useState(bondingTokens[1]);
+  const [from, setFrom] = useState(coin);
+  const [to, setTo] = useState(coin);
   const [playState, setPlayState] = useState(false);
   const [ignoreToken, setIgnoreToken] = useState();
+
+  console.log(assets, "$$$$$$$$");
 
   const handleModalClose = () => {
     setPlayState(false);
@@ -49,44 +57,31 @@ function CastleModal({ show, handleClose }) {
     setPlayState(false);
   }, []);
 
-  console.log(to, "tototot");
+  // useEffect(() => {
+  //   if (assets?.length > 0) {
+  //     setFrom(assets[0]);
+  //     setTo(assets[1]);
+  //   }
+  // }, [assets]);
+
+  console.log(playState, "tototot");
 
   return (
     <>
       <CustomModal show={show} handleClose={handleModalClose}>
         {playState ? (
-          <form action="">
-            <div className="head">
-              <h3>The Castle</h3>
-              <i className="fa-solid fa-xmark" onClick={handleModalClose}></i>
-            </div>
-            <div className="field">
-              <p>From</p>
-              <div className="select-dummy">
-                <img src={from?.logoURI} alt="" onClick={handleFromModal} />
-                <input type="text" />
-              </div>
-            </div>
-            <div className="arrow">
-              <i className="fa-solid fa-arrow-down"></i>
-            </div>
-            <div className="field">
-              <p>To</p>
-              <div className="select-dummy">
-                <img src={to?.logoURI} alt="" onClick={handleToModal} />
-                <input type="text" />
-              </div>
-            </div>
-            <button type="submit">Swap</button>
-          </form>
+          <CastleInteraction
+            handleModalClose={() => handleModalClose()}
+            handleFromModal={() => handleFromModal()}
+            handleToModal={() => handleToModal()}
+            from={from}
+            to={to}
+            handleSelectedToken={() => handleSelectedToken}
+            handleTokenClose={() => handleTokenClose}
+            handleTokenOpen={() => handleTokenOpen}
+          />
         ) : (
-          <div className="play-modal">
-            <div className="title">Play</div>
-            <div className="title">King of Defi</div>
-            <div className="play-btn" onClick={handlePlay}>
-              <i className="fa-solid fa-play"></i>
-            </div>
-          </div>
+          <CastlePlay handlePlay={() => handlePlay()} />
         )}
       </CustomModal>
       <SelectTokenModal
