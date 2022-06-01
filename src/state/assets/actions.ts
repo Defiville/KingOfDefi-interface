@@ -18,7 +18,7 @@ export const getAssetList = (assetList) => (dispatch) => {
     //@ts-ignore
 export const appendAssetList = (asset, index) => (dispatch) => {
     dispatch({type: actions.ASSETLIST_APPEND_LOADING})
-    if(asset.length > 18 && index){
+    if(asset.length > 19 && index){
         // if(asset.index === 1){
         //     let newPayload = []
         // }
@@ -34,4 +34,9 @@ export const appendAssetList = (asset, index) => (dispatch) => {
     }else{
         dispatch({type: actions.ASSETLIST_APPEND_ERROR})
     }
+}
+
+    //@ts-ignore
+export const clearAssets = () => (dispatch) => {
+    dispatch({type: actions.ASSETLIST_CLEAR})
 }

@@ -2,7 +2,6 @@ import React from "react";
 
 import mapImage from "./images/map.png";
 
-import Assets from "./components/assetBar/Assets";
 import Navbar from "./components/navbar/Navbar";
 
 import Castle from "./components/castle/mapCastle/Castle";
@@ -12,6 +11,7 @@ import { ContractContextProvider } from "./hooks/contract";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import AssetProvider from "./hooks/asset/AssetProvider";
+import Assets from "./components/assetBar/Asset/Assets";
 
 function App() {
   return (

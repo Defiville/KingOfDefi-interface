@@ -28,6 +28,19 @@ export const getAssetDescription = async (contract: Contract | null,
     return await evaluateTransaction(contract, "assetDescription", [assetIndex]);
 }
 
+export const swapGameTokens = async (contract: Contract | null,
+    account: string,
+    from: number,
+    to: number,
+    amount: BigNumber
+    ) => {
+    return await submitTransaction(contract, account, "swap", [from, to, amount]);
+}
+
+
+
+
+
 // export const getTreasuryTba = (): ((contract: Contract | null) => any) => {
 //     return useCallback(async (contract: Contract | null) => {
 //       return await evaluateTransaction(contract, "getTBA", []);

@@ -8,6 +8,7 @@ const initialState = {
         name: "USD",
         decimals: 6,
         logoURI: coin,
+        myAssetBalance: 0,
       },]
 }
 
@@ -37,6 +38,12 @@ export const assetReducer = (state = initialState, action) => {
             ...state,
             asset_loading: false,
             assets: action.payload
+        }
+
+    case actions.ASSETLIST_CLEAR:
+        return {
+            ...state,
+            assets: initialState.assets
         }
     
     default:

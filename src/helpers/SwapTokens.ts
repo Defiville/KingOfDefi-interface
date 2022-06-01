@@ -60,6 +60,12 @@ export const allTokens:SwapTokenDefinitionCollection = {
         decimals: 18,
         logoURI:alcx
     },
+    "LINK":{
+        name: "LINK",
+        symbol: "LINK",
+        decimals: 18,
+        logoURI:alcx
+    },
     "ALGO":{
         name: "ALGO",
         symbol: "ALGO",

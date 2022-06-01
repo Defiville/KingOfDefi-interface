@@ -17,7 +17,7 @@ function CastleModal({ show, handleClose }) {
   const [playState, setPlayState] = useState(false);
   const [ignoreToken, setIgnoreToken] = useState();
 
-  console.log(assets, "$$$$$$$$");
+  // console.log(assets, "$$$$$$$$");
 
   const handleModalClose = () => {
     setPlayState(false);
@@ -57,14 +57,14 @@ function CastleModal({ show, handleClose }) {
     setPlayState(false);
   }, []);
 
-  // useEffect(() => {
-  //   if (assets?.length > 0) {
-  //     setFrom(assets[0]);
-  //     setTo(assets[1]);
-  //   }
-  // }, [assets]);
+  useEffect(() => {
+    if (assets?.length > 19) {
+      setFrom(assets[0]);
+      setTo(assets[1]);
+    }
+  }, [assets]);
 
-  console.log(playState, "tototot");
+  // console.log(playState, "tototot");
 
   return (
     <>
