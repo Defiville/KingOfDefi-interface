@@ -16,10 +16,9 @@ export const getAssetList = (assetList) => (dispatch) => {
 
 
     //@ts-ignore
-export const appendAssetList = (asset, index) => (dispatch) => {
+export const appendAssetList = (assets) => (dispatch) => {
     dispatch({type: actions.ASSETLIST_APPEND_LOADING})
-    // console.log(asset)
-    if(asset.length > 19 && index){
+    // if(assets.length > 19){
         // if(asset.index === 1){
         //     let newPayload = []
         // }
@@ -30,14 +29,22 @@ export const appendAssetList = (asset, index) => (dispatch) => {
         // });
         dispatch({
             type: actions.ASSETLIST_APPEND_SUCCESS,
-            payload: asset
+            payload: assets
         })
-    }else{
-        dispatch({type: actions.ASSETLIST_APPEND_ERROR})
-    }
+    // }else{
+    //     dispatch({type: actions.ASSETLIST_APPEND_ERROR})
+    // }
 }
 
     //@ts-ignore
 export const clearAssets = () => (dispatch) => {
     dispatch({type: actions.ASSETLIST_CLEAR})
+}
+
+ //@ts-ignore
+export const myUsdBalance = (usdBalance) => (dispatch) => {
+    dispatch({
+        type: actions.SET_USD_BALANCE,
+        payload: usdBalance
+    })
 }

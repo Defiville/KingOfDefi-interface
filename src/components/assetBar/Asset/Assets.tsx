@@ -12,7 +12,6 @@ import { decimalToExact } from "../../../helpers/conversion";
 function Assets() {
   //   @ts-ignore
   const { loading, assets } = useSelector((state) => state.swapAssets);
-  console.log(assets);
 
   // const { kingOfDefiV0 } = useContractContext();
   const address = useAddress();
@@ -55,7 +54,7 @@ function Assets() {
         {loading || assets?.length < 2 ? (
           <>{address ? "Loading.." : "Connect wallet to view your assets"}</>
         ) : (
-          assets?.length > 19 &&
+          assets?.length > 5 &&
           assets?.map((item: any, index: number) => (
             <div className="currency" key={index}>
               <div className="cur_img">

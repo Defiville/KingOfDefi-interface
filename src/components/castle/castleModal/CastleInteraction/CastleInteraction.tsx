@@ -162,7 +162,7 @@ function CastleInteraction(props: any) {
 
   const ButtonDisplay = () => {
     if (true) {
-      if (fromValue === 10000) {
+      if (fromValue > 100000) {
         return (
           <button type="button" onClick={() => handleSubmit()} disabled>
             Insufficient Balance
