@@ -55,6 +55,7 @@ function Assets() {
         {loading || assets?.length < 2 ? (
           <>{address ? "Loading.." : "Connect wallet to view your assets"}</>
         ) : (
+          assets?.length > 19 &&
           assets?.map((item: any, index: number) => (
             <div className="currency" key={index}>
               <div className="cur_img">

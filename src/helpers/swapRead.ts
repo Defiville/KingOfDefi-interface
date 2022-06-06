@@ -9,6 +9,7 @@ export const getNativeBalance = async (
   address: string,
   assetIndex: number
 ) => {
+  console.log(2)
   return await evaluateTransaction(contract, "balances", [address, assetIndex]);
 };
 

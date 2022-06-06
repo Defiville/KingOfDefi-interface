@@ -14,7 +14,11 @@ function CastleInteraction(props: any) {
   const { from, to, handleModalClose, handleFromModal, handleToModal } = props;
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
-  const [buttonText, setButtonText] = useState("Enter Amount");
+  const [buttonStatus, setButtonStatus] = useState({
+    error: "",
+    swap: false,
+    disable: false,
+  });
   const { chainLinkHub, kingOfDefiV0 } = useContractContext();
   const chainId = useChainId();
   const transactionAdder = useTransactionAdder();
@@ -24,9 +28,10 @@ function CastleInteraction(props: any) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
     console.log(value, from.index, to.index);
-    value > 0 && setButtonText("Swap");
+    // value > 0 && setButtonText("Swap");
     setFromValue(value);
     fetchToBalance(value);
+    checkDisable(value);
   };
 
   const fetchToBalance = async (value: number) => {
@@ -132,6 +137,60 @@ function CastleInteraction(props: any) {
       alert("Error " + err?.data?.message);
     }
   };
+  const checkDisable = (value: number | string) => {
+    console.log(value, from, from?.decimal, !isNaN(Number(value)));
+    if (from && value && !isNaN(Number(value))) {
+      console.log("$$$$");
+      updateButton(value, true);
+    } else {
+      console.log("####");
+      updateButton(value, false);
+    }
+  };
+
+  const updateButton = (value: number | string, swap: boolean) => {
+    let disable = true;
+    if (value > 0) {
+      disable = false;
+    }
+    setButtonStatus({
+      ...buttonStatus,
+      disable: disable,
+      swap: swap,
+    });
+  };
+
+  const ButtonDisplay = () => {
+    if (true) {
+      if (fromValue === 10000) {
+        return (
+          <button type="button" onClick={() => handleSubmit()} disabled>
+            Insufficient Balance
+          </button>
+        );
+      } else if (fromValue == 0) {
+        return (
+          <button type="button" onClick={() => handleSubmit()} disabled>
+            Enter Amount
+          </button>
+        );
+      } else {
+        if (buttonStatus.swap && !buttonStatus.disable) {
+          return (
+            <button type="button" onClick={() => handleSubmit()}>
+              Swap
+            </button>
+          );
+        } else {
+          return (
+            <button type="button" onClick={() => handleSubmit()} disabled>
+              Error
+            </button>
+          );
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     setFromValue(0);
@@ -157,7 +216,7 @@ function CastleInteraction(props: any) {
               type="number"
               name="from_value"
               value={fromValue}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             />
           </div>
         </div>
@@ -175,9 +234,7 @@ function CastleInteraction(props: any) {
             <input type="number" name="to_value" value={toValue} disabled />
           </div>
         </div>
-        <button type="button" onClick={() => handleSubmit()}>
-          {buttonText}
-        </button>
+        <ButtonDisplay />
       </>
     </form>
   );

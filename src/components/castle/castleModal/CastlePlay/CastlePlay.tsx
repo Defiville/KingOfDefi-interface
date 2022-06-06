@@ -76,7 +76,7 @@ function CastlePlay(props: any) {
     <div className="play-modal">
       <div className="title">Play</div>
       <div className="title">King of Defi</div>
-      <div className="play-btn" onClick={props.handlePlay}>
+      <div className="play-btn" onClick={() => handleSubscribe()}>
         <i className="fa-solid fa-play"></i>
       </div>
     </div>

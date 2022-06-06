@@ -18,6 +18,7 @@ export const getAssetList = (assetList) => (dispatch) => {
     //@ts-ignore
 export const appendAssetList = (asset, index) => (dispatch) => {
     dispatch({type: actions.ASSETLIST_APPEND_LOADING})
+    // console.log(asset)
     if(asset.length > 19 && index){
         // if(asset.index === 1){
         //     let newPayload = []

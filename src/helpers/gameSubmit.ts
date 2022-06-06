@@ -19,12 +19,13 @@ export const subscribeToGames = async (contract: Contract | null,
     account: string,
     spender: string,
     ) => {
-    return await submitTransaction(contract, account, "play", []);
+    return await submitTransaction(contract, account, "play", [account]);
 }
 
 export const getAssetDescription = async (contract: Contract | null,
     assetIndex: number,
     ) => {
+        console.log(1)
     return await evaluateTransaction(contract, "assetDescription", [assetIndex]);
 }
 

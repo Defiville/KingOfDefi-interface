@@ -31,6 +31,7 @@ export default function AssetProvider({ children }: Prop) {
     if (
       chainLinkHub &&
       chainLinkHub.decimal &&
+      chainLinkHub.contract &&
       kingOfDefiV0 &&
       kingOfDefiV0.decimal &&
       kingOfDefiV0.contract &&
@@ -38,18 +39,22 @@ export default function AssetProvider({ children }: Prop) {
     ) {
       const asset = await getAssetDescription(chainLinkHub.contract, item);
       //   const bal = await
-      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
-      const myAssetBalanceBN = await getNativeBalance(
-        signedContract,
-        address,
-        item
-      );
-      const myAssetBalance = decimalToExact(
-        myAssetBalanceBN,
-        kingOfDefiV0.decimal
-      );
-      if (asset) {
-        checkSwapToken(asset, item, myAssetBalance);
+      if (item && address && asset) {
+        const signedContract = kingOfDefiV0.contract.connect(
+          kingOfDefiV0.signer
+        );
+        const myAssetBalanceBN = await getNativeBalance(
+          signedContract,
+          address,
+          item
+        );
+        const myAssetBalance = decimalToExact(
+          myAssetBalanceBN,
+          kingOfDefiV0.decimal
+        );
+        if (asset) {
+          checkSwapToken(asset, item, myAssetBalance);
+        }
       }
     }
     // };
