@@ -68,8 +68,8 @@ function SelectTokenModal({
           <ul className="token-list">
             {assets
               ?.filter((item) => item?.name != ignoreToken)
-              ?.map((token) => (
-                <li onClick={() => handleClick(token)} key={token.address}>
+              ?.map((token, index) => (
+                <li onClick={() => handleClick(token)} key={index}>
                   <img src={token.logoURI} alt="" />
                   <span>{token?.name}</span>
                 </li>

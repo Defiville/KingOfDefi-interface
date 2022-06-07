@@ -25,7 +25,6 @@ export const subscribeToGames = async (contract: Contract | null,
 export const getAssetDescription = async (contract: Contract | null,
     assetIndex: number,
     ) => {
-        console.log(1)
     return await evaluateTransaction(contract, "assetDescription", [assetIndex]);
 }
 

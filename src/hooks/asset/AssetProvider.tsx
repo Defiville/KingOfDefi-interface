@@ -9,7 +9,11 @@ import {
   clearAssets,
   myUsdBalance,
 } from "../../state/assets/actions";
-import { getLastUSDPrice, getNativeBalance } from "../../helpers/swapRead";
+import {
+  getBalanceInUSD,
+  getLastUSDPrice,
+  getNativeBalance,
+} from "../../helpers/swapRead";
 import { useAddress } from "../web3";
 import { decimalToExact } from "../../helpers/conversion";
 
@@ -76,6 +80,12 @@ export default function AssetProvider({ children }: Prop) {
           address,
           item
         );
+        const myAssetInUSD = await getBalanceInUSD(
+          signedContract,
+          address,
+          item
+        );
+        const myUSDBalance = decimalToExact(myAssetInUSD, 0);
         const myAssetBalance = decimalToExact(myAssetBalanceBN, 0);
         // if (itemCheck == 0) {
         //   const newSwapList = swapTokenList;
@@ -87,7 +97,7 @@ export default function AssetProvider({ children }: Prop) {
         //   setSwapTokenList(newSwapList);
         // } else if (asset) {
         if (asset) {
-          checkSwapToken(asset, item, myAssetBalance);
+          checkSwapToken(asset, item, myAssetBalance, myUSDBalance);
         }
       }
     }
@@ -97,7 +107,8 @@ export default function AssetProvider({ children }: Prop) {
   const checkSwapToken = (
     asset: string,
     index: number,
-    myAssetBalance: number
+    myAssetBalance: number,
+    myUSDBalance: number
   ) => {
     let value = asset?.split(" ")[0];
     if (allTokens[value]) {
@@ -113,6 +124,7 @@ export default function AssetProvider({ children }: Prop) {
         ...allTokens[value],
         index: index,
         myAssetBalance: myAssetBalance,
+        myUSDBalance: myUSDBalance,
       };
 
       //   console.log(newSwapList[1], "sssssss");

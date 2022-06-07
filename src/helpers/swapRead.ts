@@ -10,8 +10,14 @@ export const getNativeBalance = async (
   address: string,
   assetIndex: number
 ) => {
-  console.log(2)
   return await evaluateTransaction(contract, "balances", [gameWeek, address, assetIndex]);
+};
+export const getBalanceInUSD = async (
+  contract: Contract | null,
+  address: string,
+  assetIndex: number
+) => {
+  return await evaluateTransaction(contract, "balanceOfInUSD", [address, assetIndex]);
 };
 
 export const checkSubscribed = async (
@@ -19,7 +25,6 @@ export const checkSubscribed = async (
   gameWeek: number,
   address: string,
 ) => {
-  console.log(2)
   return await evaluateTransaction(contract, "subscribed", [gameWeek, address]);
 };
 

@@ -27,7 +27,6 @@ function CastleInteraction(props: any) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(e.target.value);
-    console.log(value, from.index, to.index);
     // value > 0 && setButtonText("Swap");
     setFromValue(value);
     fetchToBalance(value);
@@ -45,7 +44,6 @@ function CastleInteraction(props: any) {
     } else {
       usdEquivalent = value;
     }
-    console.log(usdEquivalent, "from-token usdEquivalent");
 
     let toTokenUSDPrice = 0;
     if (to.index !== 0) {
@@ -53,12 +51,10 @@ function CastleInteraction(props: any) {
         chainLinkHub?.contract,
         to.index
       );
-      console.log(toTokenUSDPriceBN);
       toTokenUSDPrice = decimalToExact(toTokenUSDPriceBN, to.decimals);
     } else {
       toTokenUSDPrice = 1;
     }
-    console.log(toTokenUSDPrice, "to-token price in USD");
 
     const toEquivalent =
       toTokenUSDPrice !== 0 ? usdEquivalent / toTokenUSDPrice : 0;
@@ -138,12 +134,9 @@ function CastleInteraction(props: any) {
     }
   };
   const checkDisable = (value: number | string) => {
-    console.log(value, from, from?.decimal, !isNaN(Number(value)));
     if (from && value && !isNaN(Number(value))) {
-      console.log("$$$$");
       updateButton(value, true);
     } else {
-      console.log("####");
       updateButton(value, false);
     }
   };

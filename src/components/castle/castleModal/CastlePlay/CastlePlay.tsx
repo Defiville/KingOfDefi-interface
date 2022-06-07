@@ -10,7 +10,6 @@ import { useChainId } from "../../../../hooks/web3/web3Context";
 import { checkSubscribed } from "../../../../helpers/swapRead";
 
 function CastlePlay(props: any) {
-  console.log(props);
   const { kingOfDefiV0 } = useContractContext();
   const address = useAddress();
   const dispatch = useAppDispatch();
