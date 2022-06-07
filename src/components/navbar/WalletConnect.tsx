@@ -67,6 +67,24 @@ const WalletConnect = () => {
           <div>Connect Wallet</div>
         </button>
       )}
+      {isConnected && buttonText === "Wrong Network" && (
+        <>
+          {/* <div className="coin">
+            <img src={coin} alt="" style={{ width: "24px", height: "25px" }} />
+            <span> ISLA</span>
+          </div> */}
+          <div className="coin">
+            {/* <img
+              src={walletImage}
+              alt=""
+              style={{ width: "30px", height: "30px" }}
+            /> */}
+            <span onClick={clickFunc}>
+              {buttonText} <i className="fa-solid fa-xmark"></i>
+            </span>
+          </div>
+        </>
+      )}
     </>
   );
 };

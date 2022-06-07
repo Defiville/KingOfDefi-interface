@@ -12,6 +12,7 @@ import { decimalToExact } from "../../../helpers/conversion";
 function Assets() {
   //   @ts-ignore
   const { loading, assets } = useSelector((state) => state.swapAssets);
+  const chainId = useChainId();
 
   // const { kingOfDefiV0 } = useContractContext();
   const address = useAddress();
@@ -51,23 +52,31 @@ function Assets() {
     <div className="slider_wrap">
       <h4>My Assets</h4>
       <div className="slider_hub">
-        {loading || assets?.length < 2 ? (
-          <>{address ? "Loading.." : "Connect wallet to view your assets"}</>
+        {chainId === 137 ? (
+          <>
+            {loading || assets?.length < 2 ? (
+              <>
+                {address ? "Loading.." : "Connect wallet to view your assets"}
+              </>
+            ) : (
+              assets?.length > 5 &&
+              assets?.map((item: any, index: number) => (
+                <div className="currency" key={index}>
+                  <div className="cur_img">
+                    <img src={item?.logoURI} alt="" />
+                  </div>
+                  <div className="cur_content">
+                    <span>
+                      {item.myAssetBalance} {item?.name}
+                    </span>
+                    <p>${item.myAssetBalance}</p>
+                  </div>
+                </div>
+              ))
+            )}
+          </>
         ) : (
-          assets?.length > 5 &&
-          assets?.map((item: any, index: number) => (
-            <div className="currency" key={index}>
-              <div className="cur_img">
-                <img src={item?.logoURI} alt="" />
-              </div>
-              <div className="cur_content">
-                <span>
-                  {item.myAssetBalance} {item?.name}
-                </span>
-                <p>${item.myAssetBalance}</p>
-              </div>
-            </div>
-          ))
+          <>{"Please switch to Polygon Mainnet."}</>
         )}
       </div>
     </div>

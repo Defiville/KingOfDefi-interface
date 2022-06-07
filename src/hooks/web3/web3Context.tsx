@@ -4,6 +4,7 @@ import React, {
   useContext,
   useMemo,
   useCallback,
+  useEffect,
 } from "react";
 import Web3Modal from "web3modal";
 import {
@@ -64,7 +65,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
   // if (typeof window !== "undefined") {
   const [connected, setConnected] = useState(false);
   const defaultChainId = 137;
-  const [providerChainID, setProviderChainID] = useState(defaultChainId);
+  const [providerChainID, setProviderChainID] = useState(0);
   const [address, setAddress] = useState("");
   const uri = "https://polygon-rpc.com";
   const [provider, setProvider] = useState<JsonRpcProvider>(
@@ -119,6 +120,7 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
     const network = Number(otherChainID);
 
     setProviderChainID(network);
+    window.location.reload();
   };
 
   const connect = useCallback(async () => {

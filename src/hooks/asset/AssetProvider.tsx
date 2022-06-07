@@ -16,6 +16,7 @@ import {
 } from "../../helpers/swapRead";
 import { useAddress } from "../web3";
 import { decimalToExact } from "../../helpers/conversion";
+import { useChainId } from "../web3/web3Context";
 
 type Prop = {
   children: JSX.Element;
@@ -23,15 +24,17 @@ type Prop = {
 export default function AssetProvider({ children }: Prop) {
   const dispatch = useDispatch();
   const { chainLinkHub, kingOfDefiV0 } = useContractContext();
+  const chainId = useChainId();
   const address = useAddress();
   const [assetList, setAssetList] = useState<any[]>([]);
   //@ts-ignore
   const { assets } = useSelector((state) => state.swapAssets);
-  // const [swapTokenList, setSwapTokenList] = useState(assets);
+
+  console.log(chainId);
 
   useEffect(() => {
-    getMyUsdBalance();
-  }, [address, kingOfDefiV0]);
+    chainId === 137 && getMyUsdBalance();
+  }, [chainId, address, kingOfDefiV0]);
 
   // console.log(swapTokenList, "Swap Token List");
 
@@ -137,14 +140,17 @@ export default function AssetProvider({ children }: Prop) {
   };
   //   console.log(swapTokenList, "########");
 
-  const getUsdBalance = () => {};
+  // const getUsdBalance = () => {};
 
   useEffect(() => {
     let out = Array.from(Array(20), (_, x) => x);
-    address && chainLinkHub && out.map((item) => getSwapTokens(item + 1));
+    chainId === 137 &&
+      address &&
+      chainLinkHub &&
+      out.map((item) => getSwapTokens(item + 1));
     //   @ts-ignore
     // dispatch(appendAssetList(swapTokenList, index));
-  }, [address, chainLinkHub]);
+  }, [chainId, address, chainLinkHub]);
 
   //   useEffect(() => {
   //     swapTokenList &&
