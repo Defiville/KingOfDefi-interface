@@ -1,13 +1,6 @@
 [
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameDuration", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "_disputeDuration",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "_swapDelay", "type": "uint256" },
       { "internalType": "address", "name": "_chainlinkHub", "type": "address" }
     ],
     "stateMutability": "nonpayable",
@@ -17,9 +10,21 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameWeek",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "oldKing",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newKing",
         "type": "address"
       },
       {
@@ -27,12 +32,6 @@
         "internalType": "uint256",
         "name": "oldKingUSD",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "newKing",
-        "type": "address"
       },
       {
         "indexed": false,
@@ -48,7 +47,19 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "address",
+        "name": "king",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameWeek",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "token",
         "type": "address"
@@ -67,7 +78,13 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameWeek",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
         "internalType": "address",
         "name": "token",
         "type": "address"
@@ -86,10 +103,16 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "player",
         "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameWeek",
+        "type": "uint256"
       }
     ],
     "name": "Subscribed",
@@ -99,21 +122,27 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "gameWeek",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
         "internalType": "uint256",
         "name": "indexFrom",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "indexTo",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
         "name": "amountFrom",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "indexTo",
         "type": "uint256"
       },
       {
@@ -138,6 +167,7 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
       { "internalType": "address", "name": "", "type": "address" },
       { "internalType": "uint256", "name": "", "type": "uint256" }
     ],
@@ -171,7 +201,7 @@
   },
   {
     "inputs": [],
-    "name": "gameEnd",
+    "name": "gameWeek",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -187,7 +217,14 @@
   },
   {
     "inputs": [],
-    "name": "king",
+    "name": "initialVUSD",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "kings",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
@@ -200,7 +237,7 @@
     "type": "function"
   },
   {
-    "inputs": [],
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "numberOfPlayers",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -214,7 +251,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
     "name": "prizes",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -222,6 +262,7 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "_gameWeek", "type": "uint256" },
       { "internalType": "address", "name": "_token", "type": "address" },
       { "internalType": "uint256", "name": "_amount", "type": "uint256" }
     ],
@@ -238,7 +279,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
     "name": "subscribed",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",

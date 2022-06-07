@@ -62,7 +62,9 @@ function Assets() {
                 <img src={item?.logoURI} alt="" />
               </div>
               <div className="cur_content">
-                <span>1.5 {item?.name}</span>
+                <span>
+                  {item.myAssetBalance} {item?.name}
+                </span>
                 <p>${item.myAssetBalance}</p>
               </div>
             </div>

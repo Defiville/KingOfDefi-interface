@@ -19,7 +19,7 @@ export const subscribeToGames = async (contract: Contract | null,
     account: string,
     spender: string,
     ) => {
-    return await submitTransaction(contract, account, "play", [account]);
+    return await submitTransaction(contract, account, "play", []);
 }
 
 export const getAssetDescription = async (contract: Contract | null,

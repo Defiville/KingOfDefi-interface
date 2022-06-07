@@ -6,13 +6,22 @@ import { BigNumber } from "@ethersproject/bignumber";
 
 export const getNativeBalance = async (
   contract: Contract | null,
+  gameWeek: number,
   address: string,
   assetIndex: number
 ) => {
   console.log(2)
-  return await evaluateTransaction(contract, "balances", [address, assetIndex]);
+  return await evaluateTransaction(contract, "balances", [gameWeek, address, assetIndex]);
 };
 
+export const checkSubscribed = async (
+  contract: Contract | null,
+  gameWeek: number,
+  address: string,
+) => {
+  console.log(2)
+  return await evaluateTransaction(contract, "subscribed", [gameWeek, address]);
+};
 
 export const getUSDForAmount = async (
   contract: Contract | null,

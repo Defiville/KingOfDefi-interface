@@ -5,7 +5,7 @@ import { useContractContext } from "../contract";
 import coin from "../../images/coin.svg";
 import { useDispatch } from "react-redux";
 import { appendAssetList, clearAssets } from "../../state/assets/actions";
-import { getNativeBalance } from "../../helpers/swapRead";
+import { getLastUSDPrice, getNativeBalance } from "../../helpers/swapRead";
 import { useAddress } from "../web3";
 import { decimalToExact } from "../../helpers/conversion";
 
@@ -37,23 +37,32 @@ export default function AssetProvider({ children }: Prop) {
       kingOfDefiV0.contract &&
       kingOfDefiV0.signer
     ) {
+      console.log(item);
       const asset = await getAssetDescription(chainLinkHub.contract, item);
       //   const bal = await
-      if (item && address && asset) {
+      if (item && address && asset && kingOfDefiV0.decimal) {
         const signedContract = kingOfDefiV0.contract.connect(
           kingOfDefiV0.signer
         );
+        const itemCheck = item - 1;
         const myAssetBalanceBN = await getNativeBalance(
           signedContract,
+          2735,
           address,
-          item
+          itemCheck
         );
-        const myAssetBalance = decimalToExact(
-          myAssetBalanceBN,
-          kingOfDefiV0.decimal
-        );
+        const myAssetBalance = decimalToExact(myAssetBalanceBN, 0);
+        // if (itemCheck == 0) {
+        //   const newSwapList = swapTokenList;
+        //   // newSwapList[0].myAssetBalance = myAssetBalance;
+        //   // newSwapList.splice(0, 1);
+        //   setSwapTokenList(newSwapList);
+        // }
+        //   // console.log(...swapTokenList);
+        //   setSwapTokenList(newSwapList);
+        // } else if (asset) {
         if (asset) {
-          checkSwapToken(asset, item, myAssetBalance);
+          checkSwapToken(asset, itemCheck, myAssetBalance);
         }
       }
     }
@@ -65,6 +74,7 @@ export default function AssetProvider({ children }: Prop) {
     index: number,
     myAssetBalance: number
   ) => {
+    console.log(myAssetBalance);
     let value = asset?.split(" ")[0];
     if (allTokens[value]) {
       // console.log("apple");
@@ -84,11 +94,9 @@ export default function AssetProvider({ children }: Prop) {
   };
   //   console.log(swapTokenList, "########");
 
+  const getUsdBalance = () => {};
+
   useEffect(() => {
-    if (!address) {
-      //   @ts-ignore
-      dispatch(clearAssets());
-    }
     let out = Array.from(Array(20), (_, x) => x);
     address && chainLinkHub && out.map((item) => getSwapTokens(item + 1));
     //   @ts-ignore

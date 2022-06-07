@@ -7,6 +7,7 @@ import { useAppDispatch } from "../../../../store/hooks";
 import { Contract, ethers } from "ethers";
 import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { useChainId } from "../../../../hooks/web3/web3Context";
+import { checkSubscribed } from "../../../../helpers/swapRead";
 
 function CastlePlay(props: any) {
   console.log(props);
@@ -16,6 +17,22 @@ function CastlePlay(props: any) {
   const chainId = useChainId();
   const transactionAdder = useTransactionAdder();
   // const playGame = subscribeToGame();
+
+  const handleCheck = async () => {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      const checkSubscription = await checkSubscribed(
+        signedContract,
+        2735,
+        address
+      );
+      if (checkSubscription) {
+        props.handlePlay();
+      } else {
+        handleSubscribe();
+      }
+    }
+  };
 
   const handleSubscribe = () => {
     if (kingOfDefiV0 && kingOfDefiV0.signer && kingOfDefiV0.contract) {
@@ -76,7 +93,7 @@ function CastlePlay(props: any) {
     <div className="play-modal">
       <div className="title">Play</div>
       <div className="title">King of Defi</div>
-      <div className="play-btn" onClick={() => handleSubscribe()}>
+      <div className="play-btn" onClick={() => handleCheck()}>
         <i className="fa-solid fa-play"></i>
       </div>
     </div>
