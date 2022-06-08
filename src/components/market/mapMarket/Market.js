@@ -15,7 +15,7 @@ function Market() {
         </div>
       </div>
 
-      {/* <MarketModal show={show} handleClose={handleClose} /> */}
+      <MarketModal show={show} handleClose={handleClose} />
     </>
   );
 }

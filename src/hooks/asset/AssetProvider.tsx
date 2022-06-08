@@ -30,8 +30,6 @@ export default function AssetProvider({ children }: Prop) {
   //@ts-ignore
   const { assets } = useSelector((state) => state.swapAssets);
 
-  console.log(chainId);
-
   useEffect(() => {
     chainId === 137 && getMyUsdBalance();
   }, [chainId, address, kingOfDefiV0]);

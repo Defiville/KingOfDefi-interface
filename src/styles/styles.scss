@@ -394,4 +394,20 @@ body{
 			font-size:56px;
 		}
 	}
+	.address-leader{
+		font: normal 700 18px Nunito;
+		text-align: center;
+		color:#cc9a71;
+		padding-top: 15px;
+	}
+	span {
+		font: normal 700 24px Nunito;
+		margin-left: 10px;
+		letter-spacing: 0px;
+		text-align: center;
+		color: #ffffff;
+		svg {
+			margin-left: 5px;
+		}
+	}
 }
