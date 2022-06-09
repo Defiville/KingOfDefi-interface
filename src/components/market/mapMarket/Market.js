@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import MarketModal from "../marketModal/MarketModal";
+import MarketModal from "../marketModal/LeaderBoard/MarketModal";
 import marketImage from "../../../images/market.png";
 
 function Market() {

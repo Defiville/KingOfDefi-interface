@@ -10,7 +10,9 @@ const initialState = {
         decimals: 6,
         logoURI: coin,
         myAssetBalance: 0,
-      }]
+      }],
+    week_loading: false,
+    week: null
 }
 
 //@ts-ignore
@@ -66,6 +68,24 @@ export const assetReducer = (state = initialState, action) => {
         return {
             ...state,
             assets: newState
+        }
+    
+    case actions.WEEK_LOADING:
+        return{
+            ...state,
+            week_loading: true
+        }
+    
+    case actions.WEEK_SUCCESS:
+        return{
+            ...state,
+            week: action.payload
+        }
+
+    case actions.WEEK_ERROR:
+        return{
+            ...state,
+            week_loading: false
         }
     
     default:

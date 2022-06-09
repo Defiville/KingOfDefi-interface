@@ -1,22 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { getAssetDescription } from "../../helpers/gameSubmit";
 import { allTokens } from "../../helpers/SwapTokens";
 import { useContractContext } from "../contract";
-import coin from "../../images/coin.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   appendAssetList,
-  clearAssets,
+  getNumberWeek,
   myUsdBalance,
 } from "../../state/assets/actions";
-import {
-  getBalanceInUSD,
-  getLastUSDPrice,
-  getNativeBalance,
-} from "../../helpers/swapRead";
+import { getBalanceInUSD, getNativeBalance } from "../../helpers/swapRead";
 import { useAddress } from "../web3";
 import { decimalToExact } from "../../helpers/conversion";
 import { useChainId } from "../web3/web3Context";
+import { getWeek } from "../../helpers/leaderboard";
 
 type Prop = {
   children: JSX.Element;
@@ -26,28 +22,38 @@ export default function AssetProvider({ children }: Prop) {
   const { chainLinkHub, kingOfDefiV0 } = useContractContext();
   const chainId = useChainId();
   const address = useAddress();
-  const [assetList, setAssetList] = useState<any[]>([]);
   //@ts-ignore
-  const { assets } = useSelector((state) => state.swapAssets);
+  const { week } = useSelector((state) => state.swapAssets);
 
   useEffect(() => {
     chainId === 137 && getMyUsdBalance();
-  }, [chainId, address, kingOfDefiV0]);
+    chainId === 137 && getCurrentWeek();
+  }, [chainId, address, kingOfDefiV0, week]);
 
   // console.log(swapTokenList, "Swap Token List");
+
+  const getCurrentWeek = async () => {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      const currentWeek = await getWeek(signedContract);
+      const currentWeekDb = decimalToExact(currentWeek, 0);
+      // @ts-ignore
+      dispatch(getNumberWeek(currentWeekDb));
+    }
+  };
 
   const getMyUsdBalance = async () => {
     if (
       address &&
       kingOfDefiV0 &&
       kingOfDefiV0.contract &&
-      kingOfDefiV0.signer
+      kingOfDefiV0.signer &&
+      week
     ) {
       const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
-      // const itemCheck = item - 1;
       const myAssetBalanceBN = await getNativeBalance(
         signedContract,
-        2735,
+        week,
         address,
         0
       );
@@ -66,7 +72,8 @@ export default function AssetProvider({ children }: Prop) {
       kingOfDefiV0 &&
       kingOfDefiV0.decimal &&
       kingOfDefiV0.contract &&
-      kingOfDefiV0.signer
+      kingOfDefiV0.signer &&
+      week
     ) {
       const asset = await getAssetDescription(chainLinkHub.contract, item);
       //   const bal = await
@@ -77,7 +84,7 @@ export default function AssetProvider({ children }: Prop) {
         // const itemCheck = item - 1;
         const myAssetBalanceBN = await getNativeBalance(
           signedContract,
-          2735,
+          week,
           address,
           item
         );
@@ -88,15 +95,7 @@ export default function AssetProvider({ children }: Prop) {
         );
         const myUSDBalance = decimalToExact(myAssetInUSD, 0);
         const myAssetBalance = decimalToExact(myAssetBalanceBN, 0);
-        // if (itemCheck == 0) {
-        //   const newSwapList = swapTokenList;
-        //   // newSwapList[0].myAssetBalance = myAssetBalance;
-        //   // newSwapList.splice(0, 1);
-        //   setSwapTokenList(newSwapList);
-        // }
-        //   // console.log(...swapTokenList);
-        //   setSwapTokenList(newSwapList);
-        // } else if (asset) {
+
         if (asset) {
           checkSwapToken(asset, item, myAssetBalance, myUSDBalance);
         }
@@ -113,14 +112,6 @@ export default function AssetProvider({ children }: Prop) {
   ) => {
     let value = asset?.split(" ")[0];
     if (allTokens[value]) {
-      // console.log("apple");
-      // const newSwapList = swapTokenList;
-      // newSwapList.push({
-      //   ...allTokens[value],
-      //   index: index,
-      //   myAssetBalance: myAssetBalance,
-      // });
-
       const appendToken = {
         ...allTokens[value],
         index: index,
@@ -128,17 +119,10 @@ export default function AssetProvider({ children }: Prop) {
         myUSDBalance: myUSDBalance,
       };
 
-      //   console.log(newSwapList[1], "sssssss");
-
-      // setSwapTokenList(newSwapList);
-      // console.log(allTokens[value], "valll");
       //   @ts-ignore
       dispatch(appendAssetList(appendToken));
     }
   };
-  //   console.log(swapTokenList, "########");
-
-  // const getUsdBalance = () => {};
 
   useEffect(() => {
     let out = Array.from(Array(20), (_, x) => x);
@@ -146,14 +130,7 @@ export default function AssetProvider({ children }: Prop) {
       address &&
       chainLinkHub &&
       out.map((item) => getSwapTokens(item + 1));
-    //   @ts-ignore
-    // dispatch(appendAssetList(swapTokenList, index));
-  }, [chainId, address, chainLinkHub]);
-
-  //   useEffect(() => {
-  //     swapTokenList &&
-  //       //   @ts-ignore
-  //   }, [swapTokenList]);
+  }, [chainId, address, chainLinkHub, week]);
 
   return <>{children}</>;
 }

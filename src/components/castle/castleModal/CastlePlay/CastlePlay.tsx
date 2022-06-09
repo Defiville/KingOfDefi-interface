@@ -8,6 +8,7 @@ import { Contract, ethers } from "ethers";
 import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { useChainId } from "../../../../hooks/web3/web3Context";
 import { checkSubscribed } from "../../../../helpers/swapRead";
+import { useSelector } from "react-redux";
 
 function CastlePlay(props: any) {
   const { kingOfDefiV0 } = useContractContext();
@@ -15,14 +16,16 @@ function CastlePlay(props: any) {
   const dispatch = useAppDispatch();
   const chainId = useChainId();
   const transactionAdder = useTransactionAdder();
-  // const playGame = subscribeToGame();
+
+  //@ts-ignore
+  const { week } = useSelector((state) => state.swapAssets);
 
   const handleCheck = async () => {
-    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer && week) {
       const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
       const checkSubscription = await checkSubscribed(
         signedContract,
-        2735,
+        week,
         address
       );
       if (checkSubscription) {
@@ -74,7 +77,6 @@ function CastlePlay(props: any) {
               },
             })
           );
-          // checkTokenAllowance(kingOfDefiV0);
         })
         .catch((err) => {
           dispatch(

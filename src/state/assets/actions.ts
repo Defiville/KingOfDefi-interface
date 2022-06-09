@@ -1,3 +1,4 @@
+import { type } from "os";
 import * as actions from "./type";
 
 
@@ -47,4 +48,17 @@ export const myUsdBalance = (usdBalance) => (dispatch) => {
         type: actions.SET_USD_BALANCE,
         payload: usdBalance
     })
+}
+
+//@ts-ignore
+export const getNumberWeek = (weekNumber: number) => (dispatch) => {
+    dispatch({ type: actions.WEEK_LOADING})
+    if(weekNumber){
+        dispatch({
+            type: actions.WEEK_SUCCESS,
+            payload: weekNumber
+        })
+    }else{
+        dispatch({type: actions.WEEK_ERROR})
+    }
 }
