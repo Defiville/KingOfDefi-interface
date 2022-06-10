@@ -5,10 +5,15 @@ import { useContractContext } from "../contract";
 import { useDispatch, useSelector } from "react-redux";
 import {
   appendAssetList,
+  getBalanceOfUser,
   getNumberWeek,
   myUsdBalance,
 } from "../../state/assets/actions";
-import { getBalanceInUSD, getNativeBalance } from "../../helpers/swapRead";
+import {
+  getBalanceInUSD,
+  getNativeBalance,
+  getTotalUSD,
+} from "../../helpers/swapRead";
 import { useAddress } from "../web3";
 import { decimalToExact } from "../../helpers/conversion";
 import { useChainId } from "../web3/web3Context";
@@ -28,9 +33,20 @@ export default function AssetProvider({ children }: Prop) {
   useEffect(() => {
     chainId === 137 && getMyUsdBalance();
     chainId === 137 && getCurrentWeek();
+    chainId === 137 && getAssetInUSD();
   }, [chainId, address, kingOfDefiV0, week]);
 
   // console.log(swapTokenList, "Swap Token List");
+
+  const getAssetInUSD = async () => {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      const totalBalance = await getTotalUSD(signedContract, address);
+      const totalBalanceDb = decimalToExact(totalBalance, 0);
+      // @ts-ignore
+      dispatch(getBalanceOfUser(totalBalanceDb));
+    }
+  };
 
   const getCurrentWeek = async () => {
     if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {

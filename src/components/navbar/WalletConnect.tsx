@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useWeb3Context } from "../../hooks";
 import coin from "../../images/coin.svg";
 import walletImage from "../../images/wallet.svg";
@@ -15,6 +16,10 @@ const WalletConnect = () => {
   } = useWeb3Context();
 
   const [isConnected, setConnected] = useState(connected);
+
+  //@ts-ignore
+
+  const { usdBalance } = useSelector((state) => state.swapAssets);
 
   let buttonText = "Connect Wallet";
   let clickFunc: any = connect;
@@ -49,6 +54,10 @@ const WalletConnect = () => {
           <div className="coin">
             <img src={coin} alt="" style={{ width: "24px", height: "25px" }} />
             <span> ISLA</span>
+          </div>
+          <div className="coin">
+            <img src={coin} alt="" style={{ width: "24px", height: "25px" }} />
+            <span> V-USD: ${usdBalance}</span>
           </div>
           <div className="coin">
             <img

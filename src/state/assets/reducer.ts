@@ -12,7 +12,8 @@ const initialState = {
         myAssetBalance: 0,
       }],
     week_loading: false,
-    week: null
+    week: null,
+    usdBalance: null
 }
 
 //@ts-ignore
@@ -71,6 +72,7 @@ export const assetReducer = (state = initialState, action) => {
         }
     
     case actions.WEEK_LOADING:
+    case actions.USD_LOADING:
         return{
             ...state,
             week_loading: true
@@ -83,9 +85,15 @@ export const assetReducer = (state = initialState, action) => {
         }
 
     case actions.WEEK_ERROR:
+    case actions.USD_ERROR:
         return{
             ...state,
             week_loading: false
+        }
+    case actions.USD_SUCCESS:
+        return{
+            ...state,
+            usdBalance: action.payload
         }
     
     default:

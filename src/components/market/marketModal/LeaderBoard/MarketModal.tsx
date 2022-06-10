@@ -63,7 +63,7 @@ function MarketModal({ show, handleClose }) {
       if (kingOfDefiV0 && kingOfDefiV0.decimal) {
         const res = await stealTheCrown(contract, address);
         transactionAdder(res, {
-          summary: "Swap token",
+          summary: "Steal Crown",
         });
         const { hash } = res;
         const provider = new ethers.providers.Web3Provider(window.ethereum);

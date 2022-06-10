@@ -62,3 +62,16 @@ export const getNumberWeek = (weekNumber: number) => (dispatch) => {
         dispatch({type: actions.WEEK_ERROR})
     }
 }
+
+//@ts-ignore
+export const getBalanceOfUser = (totalBalance: number) => (dispatch) => {
+    dispatch({ type: actions.USD_LOADING})
+    if(totalBalance){
+        dispatch({
+            type: actions.USD_SUCCESS,
+            payload: totalBalance
+        })
+    }else{
+        dispatch({type: actions.USD_ERROR})
+    }
+}

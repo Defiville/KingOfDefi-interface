@@ -14,3 +14,7 @@ export const WEEK_LOADING = "WEEK_LOADING"
 export const WEEK_SUCCESS = "WEEK_SUCCESS"
 export const WEEK_ERROR = "WEEK_ERROR"
 
+export const USD_LOADING = "USD_LOADING"
+export const USD_SUCCESS = "USD_SUCCESS"
+export const USD_ERROR = "USD_ERROR"
+
