@@ -83,7 +83,8 @@ function CastleInteraction(props: any) {
   const swapGameTokensAction = async (contract: Contract | null) => {
     try {
       if (kingOfDefiV0 && kingOfDefiV0.decimal) {
-        const bigAmount = exactToDecimal(fromValue, from.decimals);
+        const bigAmount = exactToDecimal(fromValue, 18);
+        console.log(bigAmount);
         const res = await swapGameTokens(
           contract,
           address,
