@@ -154,12 +154,28 @@ function CastleInteraction(props: any) {
                 receipt: "failed",
               })
             );
-            alert("Swap token failed");
+            toast.error("Swap Failed", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             setLoadingButton(false);
           });
       }
     } catch (err: any) {
-      alert("Error " + err?.data?.message);
+      toast.error(`Error + ${err?.data?.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   const checkDisable = (value: number | string) => {

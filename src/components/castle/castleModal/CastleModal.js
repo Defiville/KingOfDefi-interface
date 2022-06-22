@@ -27,7 +27,7 @@ function CastleModal({ show, handleClose }) {
   // console.log(assets, "$$$$$$$$");
 
   const handleModalClose = () => {
-    setPlayState(false);
+    // setPlayState(false);
     handleClose();
   };
   const handleSelectedToken = (token) => {
@@ -83,6 +83,8 @@ function CastleModal({ show, handleClose }) {
   // useEffect(() => {
   //   setPlayState(false);
   // }, []);
+
+  console.log(playState, "....");
 
   useEffect(() => {
     if (assets?.length > 19) {

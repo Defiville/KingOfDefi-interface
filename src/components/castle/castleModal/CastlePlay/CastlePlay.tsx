@@ -9,6 +9,7 @@ import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { useChainId } from "../../../../hooks/web3/web3Context";
 import { checkSubscribed } from "../../../../helpers/swapRead";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 function CastlePlay(props: any) {
   const { kingOfDefiV0 } = useContractContext();
@@ -42,7 +43,16 @@ function CastlePlay(props: any) {
       // getApproveResponse(signedContract);
       gameSubscription(signedContract);
     } else {
-      alert("Initializing...Please wait");
+      // alert("Initializing...Please wait");
+      toast.success("Initializing Please Wait", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 

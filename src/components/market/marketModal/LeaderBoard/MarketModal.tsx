@@ -15,6 +15,7 @@ import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { useTransactionAdder } from "../../../../state/transactions/hooks";
 import { useAddress } from "../../../../hooks";
 import { useChainId } from "../../../../hooks/web3/web3Context";
+import { toast } from "react-toastify";
 
 //@ts-ignore
 function MarketModal({ show, handleClose }) {
@@ -86,7 +87,15 @@ function MarketModal({ show, handleClose }) {
                 },
               })
             );
-            alert("Swap token success");
+            toast.success("Steal Crown Success", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
             // checkTokenAllowance(kingOfDefiV0);
           })
           .catch((err) => {
@@ -97,11 +106,28 @@ function MarketModal({ show, handleClose }) {
                 receipt: "failed",
               })
             );
-            alert("Swap token failed");
+            toast.error("Steal Crown Failed", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
           });
       }
     } catch (err: any) {
-      alert("Error " + err?.data?.message);
+      toast.error(`Error + ${err?.data?.message}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // alert("Error " + err?.data?.message);
     }
   };
 
