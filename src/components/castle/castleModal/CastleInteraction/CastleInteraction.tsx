@@ -37,12 +37,15 @@ function CastleInteraction(props: any) {
 
   const fetchToBalance = async (value: number) => {
     let usdEquivalent = 0;
+    let usdEquivalentBN;
     if (from.index != 0) {
-      usdEquivalent = await getUSDForAmount(
+      const bigNumberValue = value ? exactToDecimal(value, 18) : 0;
+      usdEquivalentBN = await getUSDForAmount(
         chainLinkHub?.contract,
         from.index,
-        value
+        bigNumberValue
       );
+      usdEquivalent = decimalToExact(usdEquivalentBN, 18);
     } else {
       usdEquivalent = value;
     }
@@ -53,11 +56,12 @@ function CastleInteraction(props: any) {
         chainLinkHub?.contract,
         to.index
       );
-      toTokenUSDPrice = decimalToExact(toTokenUSDPriceBN, to.decimals);
+      toTokenUSDPrice = decimalToExact(toTokenUSDPriceBN, 18);
     } else {
       toTokenUSDPrice = 1;
     }
 
+    console.log(usdEquivalent, ".sdkads");
     const toEquivalent =
       toTokenUSDPrice !== 0 ? usdEquivalent / toTokenUSDPrice : 0;
     setToValue(toEquivalent);

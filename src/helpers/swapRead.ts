@@ -46,7 +46,7 @@ export const checkSubscribed = async (
 export const getUSDForAmount = async (
   contract: Contract | null,
   assetIndex: number,
-  amount: number,
+  amount: BigNumber | number,
 ) => {
   return await evaluateTransaction(contract, "getUSDForAmount", [assetIndex, amount]);
 };
