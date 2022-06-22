@@ -84,8 +84,6 @@ function CastleModal({ show, handleClose }) {
   //   setPlayState(false);
   // }, []);
 
-  console.log(playState, "....");
-
   useEffect(() => {
     if (assets?.length > 19) {
       setFrom(assets[0]);

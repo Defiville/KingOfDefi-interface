@@ -61,7 +61,6 @@ function CastleInteraction(props: any) {
       toTokenUSDPrice = 1;
     }
 
-    console.log(usdEquivalent, ".sdkads");
     const toEquivalent =
       toTokenUSDPrice !== 0 ? usdEquivalent / toTokenUSDPrice : 0;
     setToValue(toEquivalent);
@@ -90,7 +89,6 @@ function CastleInteraction(props: any) {
     try {
       if (kingOfDefiV0 && kingOfDefiV0.decimal) {
         const bigAmount = exactToDecimal(fromValue, 18);
-        console.log(bigAmount);
         const res = await swapGameTokens(
           contract,
           address,
