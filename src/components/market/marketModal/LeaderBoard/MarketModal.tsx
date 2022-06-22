@@ -67,6 +67,15 @@ function MarketModal({ show, handleClose }) {
           summary: "Steal Crown",
         });
         const { hash } = res;
+        toast.success("Initializing Crown Steal", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         provider
           .waitForTransaction(hash)
