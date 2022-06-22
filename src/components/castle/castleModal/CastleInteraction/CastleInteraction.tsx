@@ -9,11 +9,13 @@ import { swapGameTokens } from "../../../../helpers/gameSubmit";
 import { Contract, ethers } from "ethers";
 import { useDispatch } from "react-redux";
 import { finalizeTransaction } from "../../../../state/transactions/actions";
+import { toast, ToastContainer } from "react-toastify";
 
 function CastleInteraction(props: any) {
   const { from, to, handleModalClose, handleFromModal, handleToModal } = props;
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
+  const [loadingButton, setLoadingButton] = useState(false);
   const [buttonStatus, setButtonStatus] = useState({
     error: "",
     swap: false,
@@ -95,8 +97,20 @@ function CastleInteraction(props: any) {
         transactionAdder(res, {
           summary: "Swap token",
         });
+
         const { hash } = res;
+        toast.success("Transaction Submitted", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         const provider = new ethers.providers.Web3Provider(window.ethereum);
+        setLoadingButton(true);
+
         provider
           .waitForTransaction(hash)
           .then((receipt: any) => {
@@ -116,7 +130,16 @@ function CastleInteraction(props: any) {
                 },
               })
             );
-            alert("Swap token success");
+            toast.success("Swap Success", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setLoadingButton(false);
             // checkTokenAllowance(kingOfDefiV0);
           })
           .catch((err) => {
@@ -128,6 +151,7 @@ function CastleInteraction(props: any) {
               })
             );
             alert("Swap token failed");
+            setLoadingButton(false);
           });
       }
     } catch (err: any) {
@@ -171,7 +195,11 @@ function CastleInteraction(props: any) {
       } else {
         if (buttonStatus.swap && !buttonStatus.disable) {
           return (
-            <button type="button" onClick={() => handleSubmit()}>
+            <button
+              className={`swap-button ${loadingButton ? "loading" : ""}`}
+              type="button"
+              onClick={() => handleSubmit()}
+            >
               Swap
             </button>
           );
@@ -193,6 +221,7 @@ function CastleInteraction(props: any) {
 
   return (
     <form>
+      {/* <ToastContainer /> */}
       <>
         <div className="head">
           <h3>The Castle</h3>

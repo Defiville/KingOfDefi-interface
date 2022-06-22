@@ -4,6 +4,8 @@ import reportWebVitals from "./reportWebVitals";
 import "../node_modules/bootstrap/scss/bootstrap.scss";
 import "./styles/styles.scss";
 import ReactDOM from "react-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-bootstrap";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -47,6 +47,8 @@ function Assets() {
   //     assets?.map((item: any) => getAssetValue(item.index));
   // }, [assets]);
 
+  const priceDisplay = () => {};
+
   return (
     // <div className="container-fluid">
     <div className="slider_wrap">
@@ -67,9 +69,14 @@ function Assets() {
                   </div>
                   <div className="cur_content">
                     <span>
-                      {item.myAssetBalance} {item?.name}
+                      {item?.myAssetBalance.toFixed(2)} {item?.name}
                     </span>
-                    <p>${item.myAssetBalance}</p>
+                    <p>
+                      $
+                      {item?.myUSDBalance
+                        ? item?.myUSDBalance.toFixed(2)
+                        : item?.myAssetBalance}
+                    </p>
                   </div>
                 </div>
               ))

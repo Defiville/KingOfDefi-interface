@@ -7,6 +7,9 @@ import CastlePlay from "./CastlePlay/CastlePlay";
 import coin from "../../../images/coin.svg";
 import { allTokens } from "../../../helpers/SwapTokens";
 import { useSelector } from "react-redux";
+import { useAddress } from "../../../hooks";
+import { checkSubscribed } from "../../../helpers/swapRead";
+import { useContractContext } from "../../../hooks/contract";
 
 function CastleModal({ show, handleClose }) {
   const [tokenShow, setTokenShow] = useState(false);
@@ -16,6 +19,10 @@ function CastleModal({ show, handleClose }) {
   const [to, setTo] = useState(coin);
   const [playState, setPlayState] = useState(false);
   const [ignoreToken, setIgnoreToken] = useState();
+  const { kingOfDefiV0 } = useContractContext();
+  const address = useAddress();
+
+  const { week } = useSelector((state) => state.swapAssets);
 
   // console.log(assets, "$$$$$$$$");
 
@@ -53,9 +60,29 @@ function CastleModal({ show, handleClose }) {
     setPlayState(true);
   };
 
+  const handleCheck = async () => {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer && week) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      const checkSubscription = await checkSubscribed(
+        signedContract,
+        week,
+        address
+      );
+      if (checkSubscription) {
+        setPlayState(true);
+      } else {
+        setPlayState(false);
+      }
+    }
+  };
+
   useEffect(() => {
-    setPlayState(false);
-  }, []);
+    handleCheck();
+  }, [kingOfDefiV0, week]);
+
+  // useEffect(() => {
+  //   setPlayState(false);
+  // }, []);
 
   useEffect(() => {
     if (assets?.length > 19) {

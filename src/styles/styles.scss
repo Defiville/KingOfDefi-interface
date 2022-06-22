@@ -411,3 +411,31 @@ body{
 		}
 	}
 }
+
+.swap-button{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.swap-button.loading {
+    background-color: #CCC;
+    padding-right: 40px;
+	position: relative;
+}
+.swap-button.loading:after {
+    content: "";
+    border-radius: 100%;
+	position: absolute;
+    width: 30px;
+	margin-left: 130px;
+    height: 30px;
+    border: 5px solid rgba(255,255,255,0.5);
+    border-left-color: #FFF;
+    border-top-color: #FFF;
+    animation: spin .6s infinite linear;
+}
+@keyframes spin { 
+    to {
+        transform: rotate(359deg);
+    }
+}

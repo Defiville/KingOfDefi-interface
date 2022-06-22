@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "./store/store";
 import AssetProvider from "./hooks/asset/AssetProvider";
 import Assets from "./components/assetBar/Asset/Assets";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 </div>
               </div>
               <Assets />
+              <ToastContainer />
             </div>
           </AssetProvider>
         </Provider>
