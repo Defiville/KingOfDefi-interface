@@ -43,13 +43,13 @@ function MarketModal({ show, handleClose }) {
 
   const checkUSDBalance = async (leader: string, signedContract: Contract) => {
     const leaderUSD = await getLeaderUSD(signedContract, leader);
-    const decimalLeaderUSD = decimalToExact(leaderUSD, 0);
+    const decimalLeaderUSD = decimalToExact(leaderUSD, 18);
     setGameLeaderUSD(decimalLeaderUSD);
   };
 
   useEffect(() => {
     leaderboardFetch();
-  }, [kingOfDefiV0]);
+  }, [kingOfDefiV0, week]);
 
   const handleStealCrown = () => {
     if (kingOfDefiV0 && kingOfDefiV0.signer && kingOfDefiV0.contract) {
