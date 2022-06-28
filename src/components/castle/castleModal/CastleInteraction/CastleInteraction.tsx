@@ -28,8 +28,13 @@ function CastleInteraction(props: any) {
   const dispatch = useDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    // value > 0 && setButtonText("Swap");
+    const setVal = e.target.value
+      ? parseInt(e.target.value) > 0
+        ? e.target.value?.replace(/^0+/, "")
+        : e.target.value
+      : "0";
+    e.target.value = setVal;
+    const value = parseFloat(setVal);
     setFromValue(value);
     fetchToBalance(value);
     checkDisable(value);
