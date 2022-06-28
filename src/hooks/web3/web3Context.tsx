@@ -192,17 +192,17 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
       web3Modal,
       providerChainID,
       checkWrongNetwork,
+      window.ethereum,
     ]
   );
-  if (typeof Web3 !== "undefined" && window.ethereum) {
-    console.log(1);
-    return (
-      <Web3Context.Provider value={{ onChainProvider }}>
-        {children}
-      </Web3Context.Provider>
-    );
-  } else {
-    // @ts-ignore
-    return <Web3Context.Provider value={null}>{children}</Web3Context.Provider>;
-  }
+  // if (typeof Web3 !== "undefined" && window.ethereum) {
+  return (
+    <Web3Context.Provider value={{ onChainProvider }}>
+      {children}
+    </Web3Context.Provider>
+  );
+  // } else {
+  //   // @ts-ignore
+  //   return <Web3Context.Provider value={null}>{children}</Web3Context.Provider>;
+  // }
 };
