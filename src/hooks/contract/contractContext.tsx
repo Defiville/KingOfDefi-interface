@@ -39,7 +39,6 @@ const ContractContext = React.createContext<ContractContextData>(null);
 export const ContractContextProvider: React.FC<{ children: ReactElement }> = ({
   children,
 }) => {
-  // if (typeof window !== "undefined") {
   const [usdt, setUsdt] = useState<UsableContract>({
     name: usdtNetwork.name,
     address: usdtNetwork.address,
@@ -102,46 +101,56 @@ export const ContractContextProvider: React.FC<{ children: ReactElement }> = ({
     signer: null,
   });
   useEffect(() => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const usdcContract = new ethers.Contract(usdc.address, usdc.abi, provider);
-    const usdtContract = new ethers.Contract(usdt.address, usdt.abi, provider);
-    const daiContract = new ethers.Contract(dai.address, dai.abi, provider);
-    const chainLinkHubContract = new ethers.Contract(
-      chainLinkHub.address,
-      chainLinkHub.abi,
-      provider
-    );
-    const kingOfDefiV0Contract = new ethers.Contract(
-      kingOfDefiV0.address,
-      kingOfDefiV0.abi,
-      provider
-    );
+    if (typeof window !== "undefined") {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const usdcContract = new ethers.Contract(
+        usdc.address,
+        usdc.abi,
+        provider
+      );
+      const usdtContract = new ethers.Contract(
+        usdt.address,
+        usdt.abi,
+        provider
+      );
+      const daiContract = new ethers.Contract(dai.address, dai.abi, provider);
+      const chainLinkHubContract = new ethers.Contract(
+        chainLinkHub.address,
+        chainLinkHub.abi,
+        provider
+      );
+      const kingOfDefiV0Contract = new ethers.Contract(
+        kingOfDefiV0.address,
+        kingOfDefiV0.abi,
+        provider
+      );
 
-    const islaContract = new ethers.Contract(
-      islaToken.address,
-      islaToken.abi,
-      provider
-    );
-    setUsdc({ ...usdc, contract: usdcContract, signer: signer });
-    setUsdt({ ...usdt, contract: usdtContract, signer: signer });
-    setDai({ ...dai, contract: daiContract, signer: signer });
-    setChainLinkHub({
-      ...chainLinkHub,
-      contract: chainLinkHubContract,
-      signer: signer,
-    });
-    setKingOfDefiV0({
-      ...kingOfDefiV0,
-      contract: kingOfDefiV0Contract,
-      signer: signer,
-    });
+      const islaContract = new ethers.Contract(
+        islaToken.address,
+        islaToken.abi,
+        provider
+      );
+      setUsdc({ ...usdc, contract: usdcContract, signer: signer });
+      setUsdt({ ...usdt, contract: usdtContract, signer: signer });
+      setDai({ ...dai, contract: daiContract, signer: signer });
+      setChainLinkHub({
+        ...chainLinkHub,
+        contract: chainLinkHubContract,
+        signer: signer,
+      });
+      setKingOfDefiV0({
+        ...kingOfDefiV0,
+        contract: kingOfDefiV0Contract,
+        signer: signer,
+      });
 
-    setIslaToken({
-      ...islaToken,
-      contract: islaContract,
-      signer: signer,
-    });
+      setIslaToken({
+        ...islaToken,
+        contract: islaContract,
+        signer: signer,
+      });
+    }
   }, []);
 
   const contractProvider = useMemo(
@@ -155,24 +164,26 @@ export const ContractContextProvider: React.FC<{ children: ReactElement }> = ({
     }),
     [usdc, usdt, dai, chainLinkHub, kingOfDefiV0, islaToken]
   );
-  return (
-    <ContractContext.Provider
-      value={{
-        chainLinkHub: contractProvider.chainLinkHub,
-        usdc: contractProvider.usdc,
-        usdt: contractProvider.usdt,
-        dai: contractProvider.dai,
-        kingOfDefiV0: contractProvider.kingOfDefiV0,
-        islaToken: contractProvider.islaToken,
-      }}
-    >
-      {children}
-    </ContractContext.Provider>
-  );
-  // } else {
-  //   //@ts-ignore
-  //   return <ContractContext.Provider>{children}</ContractContext.Provider>;
-  // }
+  if (typeof window !== "undefined" && window.ethereum) {
+    console.log(2);
+    return (
+      <ContractContext.Provider
+        value={{
+          chainLinkHub: contractProvider.chainLinkHub,
+          usdc: contractProvider.usdc,
+          usdt: contractProvider.usdt,
+          dai: contractProvider.dai,
+          kingOfDefiV0: contractProvider.kingOfDefiV0,
+          islaToken: contractProvider.islaToken,
+        }}
+      >
+        {children}
+      </ContractContext.Provider>
+    );
+  } else {
+    //@ts-ignore
+    return <ContractContext.Provider>{children}</ContractContext.Provider>;
+  }
 };
 
 type ContractContextData = {

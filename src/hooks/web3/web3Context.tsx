@@ -15,6 +15,7 @@ import {
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { switchNetwork } from "../../helpers/switchNetwork";
 import { ethers } from "ethers";
+import Web3 from "web3";
 
 type onChainProvider = {
   connect: () => Promise<Web3Provider>;
@@ -193,13 +194,15 @@ export const Web3ContextProvider: React.FC<{ children: ReactElement }> = ({
       checkWrongNetwork,
     ]
   );
-  return (
-    <Web3Context.Provider value={{ onChainProvider }}>
-      {children}
-    </Web3Context.Provider>
-  );
-  // } else {
-  //@ts-ignore
-  // return <Web3Context.Provider>{children}</Web3Context.Provider>;
-  // }
+  if (typeof Web3 !== "undefined" && window.ethereum) {
+    console.log(1);
+    return (
+      <Web3Context.Provider value={{ onChainProvider }}>
+        {children}
+      </Web3Context.Provider>
+    );
+  } else {
+    // @ts-ignore
+    return <Web3Context.Provider value={null}>{children}</Web3Context.Provider>;
+  }
 };
