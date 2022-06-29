@@ -6,6 +6,7 @@ import {
   getLeader,
   getLeaderUSD,
   stealTheCrown,
+  totalNumberOfPlayers,
 } from "../../../../helpers/leaderboard";
 import { useContractContext } from "../../../../hooks/contract";
 import { decimalToExact, exactToDecimal } from "../../../../helpers/conversion";
@@ -22,6 +23,7 @@ function MarketModal({ show, handleClose }) {
   const { kingOfDefiV0 } = useContractContext();
   const [gameLeader, setGameLeader] = useState<String | null>();
   const [gameLeaderUSD, setGameLeaderUSD] = useState<number | null>();
+  const [totalPlayers, setTotalPlayers] = useState<number | null>();
   const dispatch = useDispatch();
   const chainId = useChainId();
   const transactionAdder = useTransactionAdder();
@@ -48,8 +50,20 @@ function MarketModal({ show, handleClose }) {
     setGameLeaderUSD(decimalLeaderUSD);
   };
 
+  const getPlayerNumber = async () => {
+    if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer && week) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      if (signedContract) {
+        const number = await totalNumberOfPlayers(signedContract, week);
+        const numberDecimal = decimalToExact(number, 0);
+        setTotalPlayers(numberDecimal);
+      }
+    }
+  };
+
   useEffect(() => {
     leaderboardFetch();
+    getPlayerNumber();
   }, [kingOfDefiV0, week]);
 
   const handleStealCrown = () => {
@@ -157,10 +171,12 @@ function MarketModal({ show, handleClose }) {
             <img src={crown} alt="crown"></img>
           </div>
           <div className="address-leader">Address</div>
-          {gameLeader && <span>{gameLeader}</span>}
+          {gameLeader ? <span>{gameLeader}</span> : <span>N/A</span>}
 
           <div className="address-leader">USD Amount</div>
-          <span>${gameLeaderUSD}</span>
+          <span>${gameLeaderUSD ? gameLeaderUSD : "N/A"}</span>
+          <div className="address-leader">Total Players</div>
+          <span>{totalPlayers}</span>
         </div>
         <button type="button" onClick={() => handleStealCrown()}>
           Steal The Crown

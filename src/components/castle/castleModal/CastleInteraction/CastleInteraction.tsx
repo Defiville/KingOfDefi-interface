@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { decimalToExact, exactToDecimal } from "../../../../helpers/conversion";
-import { getLastUSDPrice, getUSDForAmount } from "../../../../helpers/swapRead";
+import {
+  getBalanceInUSD,
+  getLastUSDPrice,
+  getNativeBalance,
+  getUSDForAmount,
+} from "../../../../helpers/swapRead";
 import { useContractContext } from "../../../../hooks/contract";
 import { useChainId } from "../../../../hooks/web3/web3Context";
 import { useTransactionAdder } from "../../../../state/transactions/hooks";
 import { useAddress } from "../../../../hooks";
 import { swapGameTokens } from "../../../../helpers/gameSubmit";
 import { Contract, ethers } from "ethers";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -16,6 +21,7 @@ function CastleInteraction(props: any) {
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
   const [loadingButton, setLoadingButton] = useState(false);
+  const [fromBalance, setFromBalance] = useState(0);
   const [buttonStatus, setButtonStatus] = useState({
     error: "",
     swap: false,
@@ -26,6 +32,9 @@ function CastleInteraction(props: any) {
   const transactionAdder = useTransactionAdder();
   const address = useAddress();
   const dispatch = useDispatch();
+
+  //@ts-ignore
+  const { week } = useSelector((state) => state.swapAssets);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const setVal = e.target.value
@@ -203,7 +212,7 @@ function CastleInteraction(props: any) {
 
   const ButtonDisplay = () => {
     if (true) {
-      if (fromValue > 100000) {
+      if (fromValue > fromBalance) {
         return (
           <button type="button" onClick={() => handleSubmit()} disabled>
             Insufficient Balance
@@ -237,10 +246,31 @@ function CastleInteraction(props: any) {
     }
   };
 
+  const getTokenUSDBalance = async () => {
+    if (
+      address &&
+      kingOfDefiV0 &&
+      kingOfDefiV0.contract &&
+      kingOfDefiV0.signer &&
+      from.index >= 0
+    ) {
+      const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
+      const myAssetBalanceBN = await getNativeBalance(
+        signedContract,
+        week,
+        address,
+        from.index
+      );
+      const myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
+      setFromBalance(myAssetBalance);
+    }
+  };
+
   useEffect(() => {
     setFromValue(0);
     setToValue(0);
-  }, [from, to]);
+    getTokenUSDBalance();
+  }, [from, to, week]);
 
   return (
     <form>

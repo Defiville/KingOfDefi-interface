@@ -24,6 +24,13 @@ export const getLeaderUSD = async (
   return await evaluateTransaction(contract, "calculateTotalUSD", [address]);
 };
 
+export const totalNumberOfPlayers = async (
+  contract: Contract | null,
+  gameWeek: number,
+) => {
+  return await evaluateTransaction(contract, "numberOfPlayers", [gameWeek]);
+};
+
 export const stealTheCrown = async (contract: Contract | null,
   account: string
   ) => {
