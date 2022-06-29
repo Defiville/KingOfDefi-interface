@@ -15,6 +15,7 @@ import { Contract, ethers } from "ethers";
 import { useDispatch, useSelector } from "react-redux";
 import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { toast, ToastContainer } from "react-toastify";
+import { getSwapSuccess } from "../../../../state/assets/actions";
 
 function CastleInteraction(props: any) {
   const { from, to, handleModalClose, handleFromModal, handleToModal } = props;
@@ -146,6 +147,8 @@ function CastleInteraction(props: any) {
                 },
               })
             );
+            //@ts-ignore
+            dispatch(getSwapSuccess());
             toast.success("Swap Success", {
               position: "top-right",
               autoClose: 5000,

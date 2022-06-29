@@ -22,19 +22,20 @@ import { getWeek } from "../../helpers/leaderboard";
 type Prop = {
   children: JSX.Element;
 };
+
 export default function AssetProvider({ children }: Prop) {
   const dispatch = useDispatch();
   const { chainLinkHub, kingOfDefiV0 } = useContractContext();
   const chainId = useChainId();
   const address = useAddress();
   //@ts-ignore
-  const { week } = useSelector((state) => state.swapAssets);
+  const { week, swapSuccess } = useSelector((state) => state.swapAssets);
 
   useEffect(() => {
     chainId === 137 && getMyUsdBalance();
     chainId === 137 && getCurrentWeek();
     chainId === 137 && getAssetInUSD();
-  }, [chainId, address, kingOfDefiV0, week]);
+  }, [chainId, address, kingOfDefiV0, week, swapSuccess]);
 
   // console.log(swapTokenList, "Swap Token List");
 

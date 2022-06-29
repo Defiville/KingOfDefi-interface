@@ -13,7 +13,8 @@ const initialState = {
       }],
     week_loading: false,
     week: null,
-    usdBalance: null
+    usdBalance: null,
+    swapSuccess: false
 }
 
 //@ts-ignore
@@ -94,6 +95,12 @@ export const assetReducer = (state = initialState, action) => {
         return{
             ...state,
             usdBalance: action.payload
+        }
+
+    case actions.SWAP_SUCCESS:
+        return{
+            ...state,
+            swapSuccess: !(state.swapSuccess)
         }
     
     default:

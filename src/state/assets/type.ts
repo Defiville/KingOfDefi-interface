@@ -18,3 +18,6 @@ export const USD_LOADING = "USD_LOADING"
 export const USD_SUCCESS = "USD_SUCCESS"
 export const USD_ERROR = "USD_ERROR"
 
+export const SWAP_SUCCESS = "SWAP_SUCCESS"
+
+

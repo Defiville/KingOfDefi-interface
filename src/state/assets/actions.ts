@@ -75,3 +75,10 @@ export const getBalanceOfUser = (totalBalance: number) => (dispatch) => {
         dispatch({type: actions.USD_ERROR})
     }
 }
+
+//@ts-ignore
+export const getSwapSuccess = () => (dispatch) => {
+    dispatch({
+        type: actions.SWAP_SUCCESS,
+    })
+}
