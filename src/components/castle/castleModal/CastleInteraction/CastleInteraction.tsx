@@ -215,7 +215,7 @@ function CastleInteraction(props: any) {
 
   const ButtonDisplay = () => {
     if (true) {
-      if (fromValue > 1000000000) {
+      if (fromValue > fromBalance) {
         return (
           <button type="button" onClick={() => handleSubmit()} disabled>
             Insufficient Balance
@@ -264,7 +264,7 @@ function CastleInteraction(props: any) {
         address,
         from.index
       );
-      const myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
+      const myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
       setFromBalance(myAssetBalance);
     }
   };
