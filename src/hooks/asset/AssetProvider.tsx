@@ -74,7 +74,10 @@ export default function AssetProvider({ children }: Prop) {
         address,
         0
       );
-      const myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
+      console.log(myAssetBalanceBN, "check");
+      const myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
+      console.log(myAssetBalance);
+
       // @ts-ignore
       dispatch(myUsdBalance(myAssetBalance));
     }
