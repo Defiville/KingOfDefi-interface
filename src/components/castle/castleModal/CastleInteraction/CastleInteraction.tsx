@@ -264,7 +264,12 @@ function CastleInteraction(props: any) {
         address,
         from.index
       );
-      const myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
+      let myAssetBalance;
+      if (from.index == 0) {
+        myAssetBalance = decimalToExact(myAssetBalanceBN, 0);
+      } else {
+        myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
+      }
       setFromBalance(myAssetBalance);
     }
   };

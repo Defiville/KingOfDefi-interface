@@ -416,7 +416,11 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	&:hover{
+		background: #88aac3;
+	}
 }
+
 .swap-button.loading {
     background-color: #CCC;
     padding-right: 40px;
