@@ -78,6 +78,7 @@ export default function AssetProvider({ children }: Prop) {
 
       // @ts-ignore
       dispatch(myUsdBalance(myAssetBalance));
+      console.log(myAssetBalance);
     }
   };
 
@@ -148,7 +149,7 @@ export default function AssetProvider({ children }: Prop) {
       address &&
       chainLinkHub &&
       out.map((item) => getSwapTokens(item + 1));
-  }, [chainId, address, chainLinkHub, week]);
+  }, [chainId, address, chainLinkHub, week, swapSuccess]);
 
   return <>{children}</>;
 }

@@ -56,30 +56,55 @@ function Assets() {
       <div className="slider_hub">
         {chainId === 137 ? (
           <>
-            {loading || assets?.length < 2 ? (
+            {loading || assets?.length < 1 ? (
               <>
                 {address ? "Loading.." : "Connect wallet to view your assets"}
               </>
             ) : (
-              assets?.length > 5 &&
-              assets?.map((item: any, index: number) => (
-                <div className="currency" key={index}>
-                  <div className="cur_img">
-                    <img src={item?.logoURI} alt="" />
-                  </div>
-                  <div className="cur_content">
-                    <span>
-                      {item?.myAssetBalance.toFixed(2)} {item?.name}
-                    </span>
-                    <p>
-                      $
-                      {item?.myUSDBalance
-                        ? item?.myUSDBalance.toFixed(2)
-                        : item?.myAssetBalance}
-                    </p>
-                  </div>
-                </div>
-              ))
+              <>
+                {assets?.length > 1 &&
+                  assets
+                    ?.filter((item: any) => item?.myAssetBalance)
+                    .map((item: any, index: number) => (
+                      <div className="currency" key={index}>
+                        <div className="cur_img">
+                          <img src={item?.logoURI} alt="" />
+                        </div>
+                        <div className="cur_content">
+                          <span>
+                            {item?.myAssetBalance.toFixed(2)} {item?.name}
+                          </span>
+                          <p>
+                            $
+                            {item?.myUSDBalance
+                              ? item?.myUSDBalance.toFixed(2)
+                              : item?.myAssetBalance}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                {assets?.length > 1 &&
+                  assets
+                    ?.filter((item: any) => item?.myAssetBalance === 0)
+                    .map((item: any, index: number) => (
+                      <div className="currency" key={index}>
+                        <div className="cur_img">
+                          <img src={item?.logoURI} alt="" />
+                        </div>
+                        <div className="cur_content">
+                          <span>
+                            {item?.myAssetBalance.toFixed(2)} {item?.name}
+                          </span>
+                          <p>
+                            $
+                            {item?.myUSDBalance
+                              ? item?.myUSDBalance.toFixed(2)
+                              : item?.myAssetBalance}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+              </>
             )}
           </>
         ) : (
