@@ -103,7 +103,7 @@ function CastleInteraction(props: any) {
   const swapGameTokensAction = async (contract: Contract | null) => {
     try {
       if (kingOfDefiV0 && kingOfDefiV0.decimal) {
-        const bigAmount = exactToDecimal(fromValue, 18);
+        const bigAmount = exactToDecimal(fromValue, 1);
         const res = await swapGameTokens(
           contract,
           address,
@@ -215,7 +215,7 @@ function CastleInteraction(props: any) {
 
   const ButtonDisplay = () => {
     if (true) {
-      if (fromValue > fromBalance) {
+      if (fromValue > 1000000000) {
         return (
           <button type="button" onClick={() => handleSubmit()} disabled>
             Insufficient Balance

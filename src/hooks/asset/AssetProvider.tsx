@@ -43,7 +43,7 @@ export default function AssetProvider({ children }: Prop) {
     if (kingOfDefiV0 && kingOfDefiV0.contract && kingOfDefiV0.signer) {
       const signedContract = kingOfDefiV0.contract.connect(kingOfDefiV0.signer);
       const totalBalance = await getTotalUSD(signedContract, address);
-      const totalBalanceDb = decimalToExact(totalBalance, 18);
+      const totalBalanceDb = decimalToExact(totalBalance, 1);
       // @ts-ignore
       dispatch(getBalanceOfUser(totalBalanceDb));
     }
@@ -113,8 +113,8 @@ export default function AssetProvider({ children }: Prop) {
           address,
           item
         );
-        const myUSDBalance = decimalToExact(myAssetInUSD, 18);
-        const myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
+        const myUSDBalance = decimalToExact(myAssetInUSD, 1);
+        const myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
 
         if (asset) {
           checkSwapToken(asset, item, myAssetBalance, myUSDBalance);
