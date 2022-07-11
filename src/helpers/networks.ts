@@ -57,7 +57,7 @@ export const chainLinkHubNetwork: TokenDefinition = {
 
 export const kingOfDefiV0Network: TokenDefinition = {
   name:"King of Defi",
-  address: "0x04FdbfF85A8bAc1f2c7494830594406ebBFF7F91",
+  address: "0xc613cac4e98bebff219cfbaa36f20d65e1c394c0",
   symbol:"KOD",
   decimals: 18,
   chainId:137,

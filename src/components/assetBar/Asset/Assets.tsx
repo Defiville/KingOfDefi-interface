@@ -78,7 +78,7 @@ function Assets() {
                             $
                             {item?.myUSDBalance
                               ? item?.myUSDBalance.toFixed(2)
-                              : item?.myAssetBalance}
+                              : item?.myAssetBalance.toFixed(2)}
                           </p>
                         </div>
                       </div>

@@ -50,6 +50,14 @@ function CastleInteraction(props: any) {
     checkDisable(value);
   };
 
+  const handleMaximum = () => {
+    // const balance = decimalToExact(fromBalance, 18);
+    // console.log(balance);
+    setFromValue(fromBalance);
+    fetchToBalance(fromBalance);
+    checkDisable(fromBalance);
+  };
+
   const fetchToBalance = async (value: number) => {
     let usdEquivalent = 0;
     let usdEquivalentBN;
@@ -76,9 +84,11 @@ function CastleInteraction(props: any) {
       toTokenUSDPrice = 1;
     }
 
-    const toEquivalent =
-      toTokenUSDPrice !== 0 ? usdEquivalent / toTokenUSDPrice : 0;
-    setToValue(toEquivalent);
+    const toEquivalent = (
+      toTokenUSDPrice !== 0 ? usdEquivalent / toTokenUSDPrice : 0
+    ).toFixed(18);
+    const toEquivalentInt = parseFloat(toEquivalent);
+    setToValue(toEquivalentInt);
   };
 
   const handleSubmit = () => {
@@ -101,9 +111,18 @@ function CastleInteraction(props: any) {
   };
 
   const swapGameTokensAction = async (contract: Contract | null) => {
+    // const bigAmount = exactToDecimal(fromValue, 0);
+    // console.log(bigAmount);
+    // console.log(from.index, to.index, bigAmount);
     try {
-      if (kingOfDefiV0 && kingOfDefiV0.decimal) {
-        const bigAmount = exactToDecimal(fromValue, 1);
+      if (kingOfDefiV0 && kingOfDefiV0.decimal && from.index >= 0) {
+        // let bigAmount;
+        // if (from.index === 0) {
+        //   bigAmount = exactToDecimal(fromValue, 0);
+        // } else {
+        //   bigAmount = exactToDecimal(fromValue, 0);
+        // }
+        const bigAmount = exactToDecimal(fromValue, 18);
         const res = await swapGameTokens(
           contract,
           address,
@@ -182,7 +201,8 @@ function CastleInteraction(props: any) {
           });
       }
     } catch (err: any) {
-      toast.error(`Error + ${err?.data?.message}`, {
+      const msg = err?.data?.message || err?.message || "Failed to execute";
+      toast.error(`Error : ${msg}`, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -191,6 +211,7 @@ function CastleInteraction(props: any) {
         draggable: true,
         progress: undefined,
       });
+      console.log(err);
     }
   };
   const checkDisable = (value: number | string) => {
@@ -266,9 +287,9 @@ function CastleInteraction(props: any) {
       );
       let myAssetBalance;
       if (from.index == 0) {
-        myAssetBalance = decimalToExact(myAssetBalanceBN, 0);
+        myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
       } else {
-        myAssetBalance = decimalToExact(myAssetBalanceBN, 1);
+        myAssetBalance = decimalToExact(myAssetBalanceBN, 18);
       }
       setFromBalance(myAssetBalance);
     }
@@ -302,6 +323,9 @@ function CastleInteraction(props: any) {
               value={fromValue}
               onChange={(e) => handleChange(e)}
             />
+            <div className="maximum" onClick={handleMaximum}>
+              MAX
+            </div>
           </div>
         </div>
         <div className="arrow">

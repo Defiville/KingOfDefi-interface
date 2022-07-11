@@ -61,6 +61,17 @@ body{
 				font-size: 20px;
 			}
 		}
+		.maximum{
+			background: #704525;
+			cursor: pointer;
+			padding: 5px 15px;
+			margin-left: 15px;
+			border-radius: 5px;
+			position: absolute;
+			right: 10%;
+			font-size: 14px;
+			color: #cc9a71;
+		}
 		.field {
 			p {
 				margin: 5px 0px;
@@ -443,3 +454,4 @@ body{
         transform: rotate(359deg);
     }
 }
+
