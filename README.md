@@ -1,2 +1,3 @@
 # KingOfDefi-interface
-UI for the KingOfDefi game 
+
+UI for the KingOfDefi game
