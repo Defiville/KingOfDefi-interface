@@ -269,12 +269,20 @@ body{
 				width: 293px;
 				height: 366px;
 				cursor: pointer;
+				transition: all 0.3s ease-in-out;
+				&:hover{
+					transform: scale(1.1);
+				}
 			}
 		}
 		.market {
 			img {
 				width: 293px;
 				height: 366px;
+				transition: all 0.3s ease-in-out;
+				&:hover{
+					transform: scale(1.1);
+				}
 			}
 		}
 	}
