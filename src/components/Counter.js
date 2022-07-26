@@ -15,12 +15,10 @@ function Counter() {
 
   const getCurrentWeekDays = () => {
     let counterTime;
-    const weekStart = moment().startOf("week");
+    const weekStart = moment.utc().startOf("week");
     const currentWed = moment(weekStart).add(3, "days");
-    const prevWed = moment(currentWed).subtract(6, "days");
     const nextWed = moment(currentWed).add(6, "days");
     const unixCurrentWed = getUnixFormat(currentWed);
-    const unixPrevWed = getUnixFormat(prevWed);
     const unixNextWed = getUnixFormat(nextWed);
     const currentTime = getUnixFormat();
     if (currentTime <= unixCurrentWed) {
@@ -35,7 +33,6 @@ function Counter() {
     const currentDate = moment.utc().format("YYYY-MM-DD");
     const weekStart = moment.utc().startOf("week");
     const currentWed = moment(weekStart).add(4, "days").format("YYYY-MM-DD");
-    console.log(currentDate, currentWed, "new");
     if (currentDate === currentWed) {
       setShow(false);
     } else {
@@ -52,6 +49,7 @@ function Counter() {
     const timeUp = () => {
       getCurrentWeekDays();
     };
+
     const interval = setInterval(function () {
       if (Time > 0) {
         setSecond(Time % 60);
