@@ -276,6 +276,7 @@ body{
 			}
 		}
 		.market {
+			position: relative;
 			img {
 				width: 293px;
 				height: 366px;
@@ -284,8 +285,30 @@ body{
 					transform: scale(1.1);
 				}
 			}
+			.counter-market{
+				position: absolute;
+				bottom: 30px;
+				left: 0;
+				right: 0;
+				text-align: center;
+			}
 		}
 	}
+}
+.timer{
+	span{
+		background-color: #cd7d3e;
+    margin-right: 10px;
+    padding: 5px 8px;
+    color: #fff;
+    border-radius: 4px;
+    font-size: 14px;
+	}
+}
+.crown-steal{
+	border: 1px solid #cd7d3e;
+	color: #cd7d3e;
+	padding: 6px;
 }
 
 

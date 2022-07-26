@@ -1,5 +1,4 @@
 import React from "react";
-
 import WalletConnect from "./WalletConnect";
 
 function Navbar() {
