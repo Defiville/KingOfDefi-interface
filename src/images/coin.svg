@@ -1,0 +1,9 @@
+<svg id="icon-coin" xmlns="http://www.w3.org/2000/svg" width="24.083" height="25.314" viewBox="0 0 24.083 25.314">
+  <circle id="Ellipse_182" data-name="Ellipse 182" cx="12.042" cy="12.042" r="12.042" transform="translate(0 1.231)" fill="#ffe000"/>
+  <circle id="Ellipse_183" data-name="Ellipse 183" cx="10.106" cy="10.106" r="10.106" transform="translate(1.806 3.298)" fill="#ffef00"/>
+  <circle id="Ellipse_184" data-name="Ellipse 184" cx="10.106" cy="10.106" r="10.106" transform="translate(2.066 2.907)" fill="#f6a900"/>
+  <circle id="Ellipse_185" data-name="Ellipse 185" cx="10.106" cy="10.106" r="10.106" transform="translate(1.936 3.167)" fill="#ffbd00"/>
+  <path id="Path_256" data-name="Path 256" d="M72.554,50.525,60.065,63.015a8.865,8.865,0,0,1-1.013-1.922L70.633,49.511A8.808,8.808,0,0,1,72.554,50.525Z" transform="translate(-55.4 -44.629)" fill="#fd0"/>
+  <path id="Path_257" data-name="Path 257" d="M89.58,69.3,78.843,80.041a8.947,8.947,0,0,1-4.4-2.447L87.135,64.9A8.96,8.96,0,0,1,89.58,69.3Z" transform="translate(-68.784 -58.013)" fill="#fd0"/>
+  <path id="Path_258" data-name="Path 258" d="M56.343,18.225a3.71,3.71,0,0,0-2.73-2.745.239.239,0,0,1-.005-.459A3.876,3.876,0,0,0,56.4,12.244a.239.239,0,0,1,.458-.015,4.372,4.372,0,0,0,3,2.825.238.238,0,0,1-.006.456A4.042,4.042,0,0,0,56.8,18.232.238.238,0,0,1,56.343,18.225Z" transform="translate(-50.519 -12.065)" fill="#faffff"/>
+</svg>
