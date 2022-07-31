@@ -8,17 +8,17 @@ body{
 
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  height: 6px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 6px;
+	background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(32 31 30 / 41%);
-  border-radius: 6px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
 }
 
 
@@ -202,7 +202,7 @@ body{
 	width: calc(100vw - 30px);
 	position: absolute;
 	margin: 0 15px;
-	padding: 8px 12px;
+	padding: 12px;
 	bottom: 10px;
 	background: #0000002e;
 	border-radius: 12px;
@@ -223,6 +223,7 @@ body{
 		justify-content: space-between;
 		overflow-x: scroll;
 		min-height: 70px;
+		padding: 12px 0px;
 		.currency {
 			display: flex !important;
 			flex-direction: row;
@@ -231,6 +232,7 @@ body{
 			min-width: 130px;
 			.cur_img {
 				img {
+					border-radius: 50%;
 					width: 42px;
 					height: 42px;
 				}
