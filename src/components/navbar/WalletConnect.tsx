@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useWeb3Context } from "../../hooks";
 import coin from "../../images/coin.svg";
+import rules from "../../images/rules.svg";
 import walletImage from "../../images/wallet.svg";
 
 const WalletConnect = () => {
@@ -68,6 +69,10 @@ const WalletConnect = () => {
             <span onClick={disconnect}>
               {buttonText} <i className="fa-solid fa-xmark"></i>
             </span>
+          </div>
+          <div className="coin">
+            <img src={rules} alt="" style={{ width: "24px", height: "25px" }} />
+            <span> Rules</span>
           </div>
         </>
       )}
