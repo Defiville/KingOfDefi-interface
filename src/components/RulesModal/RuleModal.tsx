@@ -38,7 +38,7 @@ const RuleModal = ({ show, handleClose }) => {
           The timer will show how much time is left before the crown is
           disputed at the end of which the King can redeem the prize.
           <br/>
-          Eeryone can top up the game prize and every ERC20 is supported.
+          Everyone can top up the game prize and every ERC20 is supported.
         </div>
       </form>
     </CustomModal>
