@@ -33,11 +33,13 @@ const RuleModal = ({ show, handleClose }) => {
             steal it.
           </li>{" "}
           <br />
-          <li>
-            The timer will show how much time is left before the crown is
-            disputed.
-          </li>
         </ul>
+        <div className="rules-explain alert-info">
+          The timer will show how much time is left before the crown is
+          disputed at the end of which the King can redeem the prize.
+          <br/>
+          Eeryone can top up the game prize and every ERC20 is supported.
+        </div>
       </form>
     </CustomModal>
   );
