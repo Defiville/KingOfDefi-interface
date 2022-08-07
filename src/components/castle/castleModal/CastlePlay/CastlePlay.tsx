@@ -88,7 +88,7 @@ function CastlePlay(props: any) {
             })
           );
           toast.success(
-            "Welcome! To the Kingdom. You have received 100000 VUSD. Good luck with your strategy",
+            "Welcome to the Kingdom. You have received 100000 V-USD. Good luck in your adventure.",
             {
               position: "top-right",
               autoClose: 5000,
