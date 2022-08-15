@@ -4,6 +4,7 @@ import { useWeb3Context } from "../../hooks";
 import coin from "../../images/coin.svg";
 import rules from "../../images/rules.svg";
 import walletImage from "../../images/wallet.svg";
+import LeaderboardModal from "../LeaderboardModal";
 import RuleModal from "../RulesModal";
 
 const WalletConnect = () => {
@@ -26,9 +27,11 @@ const WalletConnect = () => {
   //Rules Modal
 
   const [show, setShow] = useState(false);
+  const [leaderboard, setLeaderboard] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleLeaderboard = () => setLeaderboard(!leaderboard);
 
   let buttonText = "Connect Wallet";
   let clickFunc: any = connect;
@@ -88,6 +91,20 @@ const WalletConnect = () => {
             <span> Rules</span>
           </div>
           <RuleModal show={show} handleClose={handleClose} />
+
+          <div className="coin" onClick={handleLeaderboard}>
+            <img
+              src={rules}
+              alt=""
+              style={{ width: "24px", height: "25px" }}
+              onClick={handleLeaderboard}
+            />
+            <span> Leaderboard</span>
+          </div>
+          <LeaderboardModal
+            show={leaderboard}
+            handleClose={handleLeaderboard}
+          />
         </>
       )}
       {!isConnected && (
