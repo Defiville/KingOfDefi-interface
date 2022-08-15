@@ -4,21 +4,23 @@ body{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Nunito;
+	cursor: url("/images/pointer.png"), auto !important;
 }
 
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  height: 6px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 6px;
+	background-color: rgba(255,255,255,0.5);
+  border-radius: 20px;
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(32 31 30 / 41%);
-  border-radius: 6px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
 }
 
 
@@ -30,9 +32,10 @@ body{
 		object-fit: cover;
 	}
 }
+
 .first_modal {
 	z-index: 1;
-	
+
 	width: 360px;
 	height: 360px;
     .modal-content{
@@ -61,6 +64,27 @@ body{
 				font-size: 20px;
 			}
 		}
+		.rules-explain{
+			text-align: left;
+			font: normal normal 700 16/18px Nunito;
+			letter-spacing: 0px;
+			color: #f9ecec;
+			margin: 0px;
+	}
+  .alert-info {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+	.points-explain{
+		text-align: left;
+			font-size: 14px;
+			margin-top: 12px !important;
+			letter-spacing: 0px;
+			color: #f9ecec;
+			margin: 0px;
+	}
 		.maximum{
 			background: #704525;
 			cursor: pointer;
@@ -86,7 +110,7 @@ body{
 				border: 4px solid #381b0c;
 				border-radius: 12px;
 				padding: 8px 12px;
-				
+
 				align-items: center;
 				img{
 					height: 42px;
@@ -177,7 +201,7 @@ body{
 				&:hover{
 					background: #000;
 				}
-				
+
 				img{
 					height: 32px;
 					width: 32px;
@@ -191,18 +215,29 @@ body{
 					width: 90%;
 					background: transparent;
 				}
-				
+
 			}
 		}
 	}
-	
+
+}
+.second_modal{
+	z-index: 1;
+	width: 650px;
+	height: 500px;
 }
 
+.modal-dialog {
+    max-width: 700px;
+}
+.ranking{
+	font-size: 16px;
+}
 .slider_wrap {
 	width: calc(100vw - 30px);
 	position: absolute;
 	margin: 0 15px;
-	padding: 8px 12px;
+	padding: 12px;
 	bottom: 10px;
 	background: #0000002e;
 	border-radius: 12px;
@@ -215,7 +250,7 @@ body{
 		letter-spacing: 0px;
 		margin-bottom: 0;
 		color: #ffffff;
-		
+
 	}
 	.slider_hub {
 		width: 100%;
@@ -223,14 +258,16 @@ body{
 		justify-content: space-between;
 		overflow-x: scroll;
 		min-height: 70px;
+		padding: 12px 0px;
 		.currency {
 			display: flex !important;
 			flex-direction: row;
 			align-items: center;
 			column-gap: 10px;
-			min-width: 130px;
+			margin-right: 15px;
 			.cur_img {
 				img {
+					border-radius: 50%;
 					width: 42px;
 					height: 42px;
 				}
@@ -240,6 +277,7 @@ body{
 					font: normal normal 800 16px/22px Nunito;
 					letter-spacing: 0px;
 					color: #ffffff;
+					white-space: nowrap;
 				}
 				p {
 					margin: 0px;
@@ -250,10 +288,10 @@ body{
 				}
 			}
 		}
-	}
+	} 
 }
 .mid_wrap {
-	
+
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -268,7 +306,7 @@ body{
 			img {
 				width: 293px;
 				height: 366px;
-				cursor: pointer;
+				cursor: url("/images/pointer.png"), auto !important;
 				transition: all 0.3s ease-in-out;
 				&:hover{
 					transform: scale(1.1);
@@ -280,6 +318,7 @@ body{
 			img {
 				width: 293px;
 				height: 366px;
+				cursor: url("/images/pointer.png"), auto !important;
 				transition: all 0.3s ease-in-out;
 				&:hover{
 					transform: scale(1.1);
@@ -316,7 +355,7 @@ body{
 	.mid_wrap{
 		.mid_wrap_content{
 			transform: scale(0.8);
-			
+
 		}
 	}
 }
@@ -324,7 +363,7 @@ body{
 	.mid_wrap{
 		.mid_wrap_content{
 			transform: scale(0.6);
-			
+
 		}
 	}
 }
@@ -343,7 +382,7 @@ body{
 		justify-content: flex-end;
 		align-items: center;
 		column-gap: 25px;
-		
+
 		.connect-btn{
 			background: #00C8D4;
 			border: none;
@@ -410,6 +449,7 @@ body{
     text-align: center;
     color: #f5e2e2;
 	}
+
 }
 
 // play modal
@@ -442,6 +482,7 @@ body{
 		color:#cc9a71;
 		padding-top: 15px;
 	}
+
 	span {
 		font: normal 700 24px Nunito;
 		margin-left: 10px;
@@ -480,9 +521,8 @@ body{
     border-top-color: #FFF;
     animation: spin .6s infinite linear;
 }
-@keyframes spin { 
+@keyframes spin {
     to {
         transform: rotate(359deg);
     }
 }
-

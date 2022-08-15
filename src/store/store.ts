@@ -5,7 +5,7 @@ import transactionReducer from "../state/transactions/reducer";
 
 const combinedReducers = combineReducers({
 	transactions: transactionReducer,
-	swapAssets: assetReducer
+	swapAssets: assetReducer,
 });
 
 const store = configureStore({

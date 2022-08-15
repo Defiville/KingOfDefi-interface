@@ -16,7 +16,7 @@ import fxs from '../images/fxs.png'
 import ghst from '../images/ghst.png'
 import link from '../images/link.png'
 import matic from '../images/matic.png'
-import wbtc from '../images/wbtc.png'
+import btc from '../images/btc.png'
 
 
 
@@ -64,7 +64,7 @@ export const allTokens:SwapTokenDefinitionCollection = {
         name: "LINK",
         symbol: "LINK",
         decimals: 18,
-        logoURI:alcx
+        logoURI:link
     },
     "ALGO":{
         name: "ALGO",
@@ -88,7 +88,7 @@ export const allTokens:SwapTokenDefinitionCollection = {
         name: "BTC",
         symbol: "BTC",
         decimals: 18,
-        logoURI: "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png",
+        logoURI: btc,
     },
     "BNB":{
         name: "BNB",
@@ -143,12 +143,6 @@ export const allTokens:SwapTokenDefinitionCollection = {
         symbol: "GHST",
         decimals: 18,
         logoURI: ghst
-    },
-    "WBTC":{
-        name: "WBTC",
-        symbol: "WBTC",
-        decimals: 18,
-        logoURI: wbtc
     },
     "MATIC":{
         name: "MATIC",

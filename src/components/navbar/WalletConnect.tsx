@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useWeb3Context } from "../../hooks";
 import coin from "../../images/coin.svg";
+import rules from "../../images/rules.svg";
 import walletImage from "../../images/wallet.svg";
+import LeaderboardModal from "../LeaderboardModal";
+import RuleModal from "../RulesModal";
 
 const WalletConnect = () => {
   const {
@@ -20,6 +23,15 @@ const WalletConnect = () => {
   //@ts-ignore
 
   const { usdBalance } = useSelector((state) => state.swapAssets);
+
+  //Rules Modal
+
+  const [show, setShow] = useState(false);
+  const [leaderboard, setLeaderboard] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const handleLeaderboard = () => setLeaderboard(!leaderboard);
 
   let buttonText = "Connect Wallet";
   let clickFunc: any = connect;
@@ -69,6 +81,30 @@ const WalletConnect = () => {
               {buttonText} <i className="fa-solid fa-xmark"></i>
             </span>
           </div>
+          <div className="coin" onClick={handleShow}>
+            <img
+              src={rules}
+              alt=""
+              style={{ width: "24px", height: "25px" }}
+              onClick={handleShow}
+            />
+            <span> Rules</span>
+          </div>
+          <RuleModal show={show} handleClose={handleClose} />
+
+          <div className="coin" onClick={handleLeaderboard}>
+            <img
+              src={rules}
+              alt=""
+              style={{ width: "24px", height: "25px" }}
+              onClick={handleLeaderboard}
+            />
+            <span> Leaderboard</span>
+          </div>
+          <LeaderboardModal
+            show={leaderboard}
+            handleClose={handleLeaderboard}
+          />
         </>
       )}
       {!isConnected && (

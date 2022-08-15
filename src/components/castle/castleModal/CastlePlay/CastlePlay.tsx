@@ -9,7 +9,7 @@ import { finalizeTransaction } from "../../../../state/transactions/actions";
 import { useChainId } from "../../../../hooks/web3/web3Context";
 import { checkSubscribed } from "../../../../helpers/swapRead";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 function CastlePlay(props: any) {
   const { kingOfDefiV0 } = useContractContext();
@@ -86,6 +86,18 @@ function CastlePlay(props: any) {
                 transactionIndex: receipt.transactionIndex,
               },
             })
+          );
+          toast.success(
+            "Welcome to the Kingdom. You have received 100000 V-USD. Good luck in your adventure.",
+            {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            }
           );
         })
         .catch((err) => {
